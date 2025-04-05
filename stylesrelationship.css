@@ -1,54 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Relationship</title>
-  <link rel="stylesheet" href="stylesrelationship.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="relationship.html">Relationship</a>
-    <a href="memories.html">Memories</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="chat.html">Chat Box</a>
-    <a href="goals.html">Goals</a>
-    <a href="gratitude.html">Gratitude Wall</a>
-    <a href="appreciation.html">Appreciation Box</a>
-  </nav>
-
-  <main class="relationship">
-    <h1>Our Relationship Timeline 💖</h1>
-
-    <section class="milestones">
-      <div class="milestone">
-        <h2>🌟 First Talk</h2>
-        <p>We first spoke on [Insert Date] — a random chat that didn’t feel random at all.</p>
-      </div>
-
-      <div class="milestone">
-        <h2>🎉 First Meeting</h2>
-        <p>We met for the first time on [Insert Date], and I still remember how you smiled that day.</p>
-      </div>
-
-      <div class="milestone">
-        <h2>💬 Deep Conversations</h2>
-        <p>Our late-night convos, vulnerability, and warmth are everything. That's where love grew!</p>
-      </div>
-
-      <div class="milestone">
-        <h2>🛤️ Ups and Downs</h2>
-        <p>We’ve had arguments, miscommunications, and hard moments — but we always come back stronger.</p>
-      </div>
-
-      <div class="milestone">
-        <h2>❤️ Still Growing</h2>
-        <p>Our relationship keeps evolving with love, learning, and shared dreams. We’re in this together.</p>
-      </div>
-    </section>
-  </main>
-</body>
-</html>
+/* ========== GLOBAL STYLES (Inherit from About style) ========== */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+  }
+  
+  /* ========== NAVIGATION ========== */
+  nav {
+    background: linear-gradient(to right, #ffafcc, #ffc8dd);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
+    border-radius: 0 0 20px 20px;
+    animation: slideDown 1s ease-out;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: #ff69b4;
+    padding: 10px 18px;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(255, 105, 180, 0.4);
+    font-size: 1rem;
+  }
+  
+  nav a:hover {
+    background-color: #ff85c1;
+    transform: scale(1.05);
+  }
+  
+  @keyframes slideDown {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* ========== MAIN RELATIONSHIP SECTION ========== */
+  main.relationship {
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+    background: linear-gradient(to right, #fff0f6, #ffe0ec);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  main.relationship h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    text-align: center;
+    color: #d6336c;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px #ffc9de;
+  }
+  
+  /* ========== MILESTONES SECTION ========== */
+  .milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .milestone {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .milestone:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.25);
+  }
+  
+  .milestone h2 {
+    color: #f06595;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .milestone p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #444;
+  }
+  
+  /* ========== FADE IN ========== */
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
