@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdowns</title>
+  <link rel="stylesheet" href="stylescountdowns.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="relationship.html">Relationship</a>
+    <a href="memories.html">Memories</a>
+    <a href="agreement.html">Agreement</a>
+    <a href="bucketlist.html">Bucket List</a>
+    <a href="chatbox.html">Monthly Chat Box</a>
+    <a href="goals.html">Dreams & Goals</a>
+    <a href="countdown.html">Countdowns</a>
+    <a href="playlist.html">Playlist</a>
+    <a href="letter.html">Letter of Appreciation</a>
+    <a href="gratitude.html">Gratitude Wall</a>
+  </nav>
+
+  <main class="countdowns">
+    <h1>Our Special Countdown Timers ⏳</h1>
+
+    <section class="timer-boxes">
+      <div class="timer-card">
+        <h2>Anniversary ❤️</h2>
+        <p id="anniversary"></p>
+      </div>
+
+      <div class="timer-card">
+        <h2>Next Trip ✈️</h2>
+        <p id="trip"></p>
+      </div>
+
+      <div class="timer-card">
+        <h2>Days Since We Met 🌸</h2>
+        <p id="sinceMet"></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function countdown(id, targetDate) {
+      const countEl = document.getElementById(id);
+      const now = new Date();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countEl.innerHTML = "🎉 It's here!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      countEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    const anniversaryDate = new Date("2025-06-01T00:00:00");
+    const tripDate = new Date("2025-08-15T00:00:00");
+    const metDate = new Date("2023-12-15T00:00:00");
+
+    setInterval(() => {
+      countdown("anniversary", anniversaryDate);
+      countdown("trip", tripDate);
+      const now = new Date();
+      const since = Math.floor((now - metDate) / (1000 * 60 * 60 * 24));
+      document.getElementById("sinceMet").innerHTML = `${since} days ❤️`;
+    }, 1000);
+  </script>
+</body>
+</html>
