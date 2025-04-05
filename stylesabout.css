@@ -1,0 +1,91 @@
+  
+ /* =========================
+   ❤️ ABOUT US PAGE STYLES
+   ========================= */
+
+   body {
+    background-color: red;
+  }
+main.about {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background: linear-gradient(to right, #fff0f6, #ffe0ec);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+main.about h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  text-align: center;
+  color: #d6336c;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px #ffc9de;
+}
+
+/* Profile Cards Section */
+.profile-cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 24px rgba(255, 105, 180, 0.3);
+}
+
+.card h2 {
+  color: #f06595;
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Our Story Section */
+.our-story {
+  background: #fff7fb;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  text-align: center;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.our-story h2 {
+  color: #c9184a;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.our-story p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #444;
+  max-width: 700px;
+  margin: auto;
+}
