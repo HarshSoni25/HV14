@@ -51,6 +51,10 @@
  /* =========================
    ❤️ ABOUT US PAGE STYLES
    ========================= */
+
+   body {
+    background-color: lightyellow;
+  }
 main.about {
   padding: 3rem 2rem;
   max-width: 1000px;
