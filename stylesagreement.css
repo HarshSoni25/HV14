@@ -1,0 +1,94 @@
+/* =========================
+   💕 AGREEMENT PAGE STYLES
+   ========================= */
+
+   main.agreement {
+    padding: 3rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+    background: linear-gradient(to right, #fff0f6, #ffe0ec);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  main.agreement h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    text-align: center;
+    color: #d6336c;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px #ffc9de;
+  }
+  
+  .agreement-section {
+    background: #fff7fb;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #444;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .uploaded-agreement {
+    text-align: center;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.1);
+  }
+  
+  .uploaded-agreement a {
+    text-decoration: none;
+    color: #c9184a;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  
+  .uploaded-agreement a:hover {
+    color: #f06595;
+  }
+  
+  /* ============ NAVIGATION STYLES ============ */
+  nav {
+    background: linear-gradient(to right, #ffafcc, #ffc8dd);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
+    border-radius: 0 0 20px 20px;
+    animation: slideDown 1s ease-out;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: #ff69b4;
+    padding: 10px 18px;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(255, 105, 180, 0.4);
+    font-size: 1rem;
+  }
+  
+  nav a:hover {
+    background-color: #ff85c1;
+    transform: scale(1.05);
+  }
+  
+  @keyframes slideDown {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
