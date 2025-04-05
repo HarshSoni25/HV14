@@ -2,7 +2,7 @@
  💖 RELATIONSHIP PAGE STYLES
 ========================= */
 
-/* Nav bar – consistent with About page */
+/* ============ NAVIGATION STYLES (synced with about) ============ */
 nav {
     background: linear-gradient(to right, #ffafcc, #ffc8dd);
     padding: 1rem 2rem;
@@ -37,7 +37,7 @@ nav {
     100% { transform: translateY(0); opacity: 1; }
   }
   
-  /* Main content container */
+  /* ============ MAIN CONTAINER ============ */
   main.relationship {
     padding: 3rem 2rem;
     max-width: 1000px;
@@ -53,6 +53,7 @@ nav {
     100% { opacity: 1; transform: translateY(0); }
   }
   
+  /* ============ HEADER (H1) ============ */
   main.relationship h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 3.5rem;
@@ -62,7 +63,7 @@ nav {
     text-shadow: 2px 2px #ffc9de;
   }
   
-  /* Relationship Milestones Section */
+  /* ============ TIMELINE / MILESTONES ============ */
   .timeline {
     display: flex;
     flex-direction: column;
