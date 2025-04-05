@@ -1,47 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Relationship</title>
-  <link rel="stylesheet" href="stylesrelationship.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans:wght@300;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="relationship.html" class="active">Relationship</a>
-    <a href="memories.html">Memories</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="chat.html">Chat Box</a>
-    <a href="goals.html">Goals</a>
-    <a href="gratitude.html">Gratitude Wall</a>
-    <a href="appreciation.html">Appreciation Box</a>
-  </nav>
+/* =============== 🌐 GLOBAL STYLES =============== */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff0f6;
+  color: #333;
+}
 
-  <main class="relationship">
-    <h1>Our Beautiful Timeline 💫</h1>
+/* =============== 🔗 NAVIGATION =============== */
+nav {
+  background-color: #ff8fab;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-weight: 500;
+}
 
-    <section class="dates">
-      <div class="event">
-        <h2>💘 First Met</h2>
-        <p>We met on [Insert Date] and that day will always be special to us.</p>
-      </div>
-      <div class="event">
-        <h2>💬 First Chat</h2>
-        <p>Our first conversation started on [Insert Date]. The rest is history ❤️</p>
-      </div>
-      <div class="event">
-        <h2>💍 Officially Together</h2>
-        <p>We made it official on [Insert Date]. The best decision ever!</p>
-      </div>
-      <div class="event">
-        <h2>🎉 First Celebration</h2>
-        <p>We celebrated our first [Birthday/Anniversary/etc.] on [Insert Date]</p>
-      </div>
-      <!-- Add more memorable dates/events -->
-    </section>
-  </main>
-</body>
-</html>
+nav a {
+  text-decoration: none;
+  color: #fff;
+  background: #ff69b4;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+nav a:hover {
+  background: #d6336c;
+  transform: translateY(-2px);
+}
+
+nav a.active {
+  background: #a4133c;
+}
+
+/* =============== 💞 RELATIONSHIP SECTION =============== */
+main.relationship {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background: linear-gradient(to right, #fff0f6, #ffe0ec);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+main.relationship h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  text-align: center;
+  color: #d6336c;
+  margin-bottom: 2.5rem;
+  text-shadow: 2px 2px #ffc9de;
+}
+
+/* Timeline / Events */
+.dates {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.event {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 24px rgba(255, 105, 180, 0.2);
+}
+
+.event h2 {
+  color: #f06595;
+  font-size: 1.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.event p {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.6;
+}
