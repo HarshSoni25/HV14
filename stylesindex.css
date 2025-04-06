@@ -4,29 +4,38 @@
    body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    color: #333;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    text-align: center;
+    min-height: 100vh;
+    padding-top: 100px; /* 🟣 This pushes the content down below nav */
   }
   
   /* =========================
      🌈 NAVIGATION BAR
      ========================= */
   nav {
-    background-color: #ff8fab;
-    padding: 1rem;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 12px 24px;
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.2rem;
     font-weight: 500;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
   }
   
   nav a {
     text-decoration: none;
-    color: #fff;
+    color: white;
     background: #ff69b4;
     padding: 10px 15px;
     border-radius: 10px;
-    transition: color 0.3s ease;
+    transition: 0.3s;
   }
   
   nav a:hover {
@@ -34,20 +43,16 @@
   }
   
   /* =========================
-     🏠 HOME PAGE STYLES
+     🏠 HOME PAGE STYLES (index.html)
      ========================= */
   main.home {
-    padding: 5rem 2rem 2rem 2rem;
-    text-align: center;
-    background: #fff0f5;
-    min-height: 100vh;
+    padding: 2rem;
   }
   
   main.home h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 3rem;
     margin-bottom: 10px;
-    color: #ff4e61;
   }
   
   main.home p {
@@ -56,24 +61,23 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    color: #333;
   }
   
   .countdown {
     font-size: 1.2rem;
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.2);
     padding: 10px 20px;
     border-radius: 15px;
     margin-bottom: 30px;
     display: inline-block;
-    color: #000;
+    color: #fff;
   }
   
   .btn {
     padding: 12px 24px;
-    background-color: #ff69b4;
-    color: white;
+    background-color: white;
+    color: #ff4e61;
     text-decoration: none;
     border-radius: 30px;
     font-weight: bold;
@@ -82,13 +86,16 @@
   
   .btn:hover {
     background-color: #ff4e61;
+    color: white;
   }
   
-  /* Responsive Adjustments */
+  /* =========================
+     📱 RESPONSIVE
+     ========================= */
   @media (max-width: 600px) {
     nav {
-      flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.5rem;
+      padding: 10px;
     }
   
     main.home h1 {
