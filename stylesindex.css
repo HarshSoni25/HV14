@@ -5,7 +5,7 @@
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(to right, #fff0f6, #ffe0ec);
-    color: rgb(0, 0, 0);
+    color: rgb(83, 18, 68);
     text-align: center;
     min-height: 100vh;
     padding-top: 100px; /* 🟣 This pushes the content down below nav */
@@ -71,7 +71,7 @@
     border-radius: 15px;
     margin-bottom: 30px;
     display: inline-block;
-    color: #fff;
+    color: rgb(190, 63, 63);
   }
   
   .btn {
