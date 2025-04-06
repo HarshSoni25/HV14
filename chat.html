@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chat Box 💬</title>
+  <title>Chat Box</title>
   <link rel="stylesheet" href="styleschatbox2.css">
-  <script type="module" src="chat.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap" rel="stylesheet">
 </head>
 <body>
   <nav>
@@ -17,19 +17,24 @@
     <a href="bucketlist.html">Bucket List</a>
     <a href="chat.html">Chat Box</a>
     <a href="goals.html">Goals</a>
-    <a href="gratitude.html">Gratitude Wall</a>
-    <a href="loa.html">Letter of Appreciation</a>
     <a href="countdowns.html">Countdowns</a>
     <a href="playlist.html">Playlist</a>
+    <a href="loa.html">Letter of Appreciation</a>
+    <a href="gratitude.html">Gratitude Wall</a>
   </nav>
 
-  <main class="chatbox">
-    <h1>Our Chat 💌</h1>
-    <div id="messages"></div>
+  <main>
+    <h1>Our Private Chat 💬</h1>
+
     <form id="chat-form">
-      <input type="text" id="message" placeholder="Write a message..." required />
+      <input type="text" id="username" placeholder="Your Name" required />
+      <input type="text" id="message" placeholder="Type your message..." required />
       <button type="submit">Send</button>
     </form>
+
+    <div id="messages" class="messages-container"></div>
   </main>
+
+  <script type="module" src="chat.js"></script>
 </body>
 </html>
