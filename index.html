@@ -5,37 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Our Love Story ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="stylesindex.css" />
+  <link rel="stylesheet" href="stylesindex.css">
 </head>
 <body>
 
   <nav>
-    <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="relationship.html">Relationship</a>
     <a href="memories.html">Memories</a>
     <a href="agreement.html">Agreement</a>
     <a href="bucketlist.html">Bucket List</a>
-    <a href="chatbox.html">Monthly Chat Box</a>
+    <a href="chat.html">Chat Box</a>
     <a href="goals.html">Dreams & Goals</a>
-    <a href="countdown.html">Countdowns</a>
+    <a href="countdowns.html">Countdowns</a>
     <a href="playlist.html">Playlist</a>
-    <a href="letter.html">Letter of Appreciation</a>
+    <a href="loa.html">Letter of Appreciation</a>
     <a href="gratitude.html">Gratitude Wall</a>
   </nav>
 
-  <h1>Welcome to Our Love Story 💖</h1>
-  <p>This is our personal space to celebrate our love, dreams, memories, and everything in between. Handcrafted with love, just for us.</p>
+  <main class="home">
+    <h1>Welcome to Our Love Story 💖</h1>
+    <p>This is our personal space to celebrate our love, dreams, memories, and everything in between. Handcrafted with love, just for us.</p>
 
-  <div class="countdown">
-    Next Special Moment in: <span id="countdown">Loading...</span>
-  </div>
+    <div class="countdown">
+      Next Special Moment in: <span id="countdown">Loading...</span>
+    </div>
 
-  <a class="btn" href="memories.html">Explore Our Memories 📸</a>
+    <a class="btn" href="memories.html">Explore Our Memories 📸</a>
+  </main>
 
   <script>
     function countdownTimer() {
-      const eventDate = new Date("2025-06-01 00:00:00").getTime();
+      const eventDate = new Date("2025-06-01T00:00:00").getTime();
       const timer = setInterval(() => {
         const now = new Date().getTime();
         const timeLeft = eventDate - now;
