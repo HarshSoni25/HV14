@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Website</title>
+  <title>Our Love Story ❤️</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="stylesindex.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
@@ -23,23 +24,39 @@
     <a href="gratitude.html">Gratitude Wall</a>
   </nav>
 
-  <main class="home">
-    <h1>Welcome to Our Space 💖</h1>
-    <p>This is our little private digital world filled with memories, goals, and love 🌸</p>
+  <h1>Welcome to Our Love Story 💖</h1>
+  <p>This is our personal space to celebrate our love, dreams, memories, and everything in between. Handcrafted with love, just for us.</p>
 
-    <ul>
-      <li><a href="about.html">About Us</a></li>
-      <li><a href="relationship.html">Relationship</a></li>
-      <li><a href="memories.html">Memories</a></li>
-      <li><a href="agreement.html">Agreement</a></li>
-      <li><a href="bucketlist.html">Bucket List</a></li>
-      <li><a href="chatbox.html">Monthly Chat Box</a></li>
-      <li><a href="goals.html">Dreams & Goals</a></li>
-      <li><a href="countdown.html">Countdowns</a></li>
-      <li><a href="playlist.html">Playlist</a></li>
-      <li><a href="letter.html">Letter of Appreciation</a></li>
-      <li><a href="gratitude.html">Gratitude Wall</a></li>
-    </ul>
-  </main>
+  <div class="countdown">
+    Next Special Moment in: <span id="countdown">Loading...</span>
+  </div>
+
+  <a class="btn" href="memories.html">Explore Our Memories 📸</a>
+
+  <script>
+    function countdownTimer() {
+      const eventDate = new Date("2025-06-01 00:00:00").getTime();
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = eventDate - now;
+
+        if (timeLeft < 0) {
+          document.getElementById("countdown").innerHTML = "It's today! 🎉";
+          clearInterval(timer);
+          return;
+        }
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }, 1000);
+    }
+
+    countdownTimer();
+  </script>
+
 </body>
 </html>

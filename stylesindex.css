@@ -1,41 +1,73 @@
 /* =========================
-   🌐 GLOBAL STYLES (Shared)
+   🌐 GLOBAL STYLES (Unified)
    ========================= */
    body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #fff0f6, #ffe0ec);
     color: #333;
   }
   
+  /* Navigation Bar */
   nav {
-    background-color: #ff8fab;
-    padding: 1rem;
+    background: linear-gradient(to right, #ffafcc, #ffc8dd);
+    padding: 1rem 2rem;
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    font-weight: 500;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
+    border-radius: 0 0 20px 20px;
+    animation: slideDown 1s ease-out;
   }
   
   nav a {
-    text-decoration: none;
     color: #fff;
-    background: #ff69b4;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: #ff69b4;
+    padding: 10px 18px;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 6px rgba(255, 105, 180, 0.4);
+    font-size: 1rem;
   }
   
   nav a:hover {
-    color: #370617;
+    background-color: #ff85c1;
+    transform: scale(1.05);
+  }
+  
+  @keyframes slideDown {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
   }
   
   /* =========================
-     🏠 HOME PAGE STYLES (index.html)
+     🏠 HOME PAGE STYLES
      ========================= */
   main.home {
-    padding: 2rem;
+    padding: 3rem 2rem;
     text-align: center;
-    background: #fff0f5;
+    background: #fff7fb;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.1);
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  main.home h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: #d6336c;
+    margin-bottom: 1rem;
+  }
+  
+  main.home p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #444;
   }
   
   main.home ul {
@@ -47,3 +79,25 @@
     margin: 10px;
     display: inline-block;
   }
+  
+  main.home ul li a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #f06595;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.15);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  
+  main.home ul li a:hover {
+    background-color: #ff85c1;
+    transform: scale(1.05);
+  }
+  
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
