@@ -42,19 +42,26 @@ form.addEventListener("submit", async (e) => {
 
 // Listen for new messages
 const q = query(messagesRef, orderBy("createdAt"));
+
 onSnapshot(q, (snapshot) => {
   messagesDiv.innerHTML = "";
   snapshot.forEach((doc) => {
     const data = doc.data();
+
     const messageElement = document.createElement("div");
     messageElement.classList.add("message");
 
     const meta = document.createElement("span");
     meta.classList.add("meta");
-    const timestamp = data.createdAt?.toDate();
-    const timeStr = timestamp ? timestamp.toLocaleString() : "";
 
-    meta.textContent = `${data.username} • ${timeStr}`;
+    // Safe timestamp handling
+    let timeStr = "Just now";
+    if (data.createdAt?.toDate) {
+      const timestamp = data.createdAt.toDate();
+      timeStr = timestamp.toLocaleString();
+    }
+
+    meta.textContent = `${data.username || "Unknown"} • ${timeStr}`;
 
     const text = document.createElement("p");
     text.textContent = data.text;
@@ -64,6 +71,6 @@ onSnapshot(q, (snapshot) => {
     messagesDiv.appendChild(messageElement);
   });
 
-  // Auto scroll to bottom
+  // Auto scroll to latest message
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });
