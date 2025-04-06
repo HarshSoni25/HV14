@@ -1,88 +1,79 @@
 /* =========================
-   🌐 GLOBAL STYLES
+   🌐 GLOBAL STYLES (Shared)
    ========================= */
-   * {
+   body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
     font-family: 'Poppins', sans-serif;
+    color: #333;
     background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
   }
   
   /* =========================
-     📌 NAVIGATION
+     🌈 NAVIGATION BAR
      ========================= */
   nav {
-    position: absolute;
-    top: 20px;
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 12px 24px;
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
+    background-color: #ff8fab;
+    padding: 1rem;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 2rem;
+    font-weight: 500;
   }
   
   nav a {
     text-decoration: none;
-    color: white;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 20px;
-    transition: background 0.3s ease;
+    color: #fff;
+    background: #ff69b4;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: color 0.3s ease;
   }
   
   nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    color: #370617;
   }
   
   /* =========================
-     🏠 MAIN HOME CONTENT
+     🏠 HOME PAGE STYLES
      ========================= */
   main.home {
-    margin-top: 100px;
+    padding: 5rem 2rem 2rem 2rem;
     text-align: center;
+    background: #fff0f5;
+    min-height: 100vh;
   }
   
   main.home h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 3rem;
     margin-bottom: 10px;
+    color: #ff4e61;
   }
   
   main.home p {
     font-size: 1.1rem;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     max-width: 600px;
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
+    color: #333;
   }
   
-  /* Countdown */
   .countdown {
     font-size: 1.2rem;
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.6);
     padding: 10px 20px;
     border-radius: 15px;
     margin-bottom: 30px;
+    display: inline-block;
+    color: #000;
   }
   
-  /* Button */
   .btn {
     padding: 12px 24px;
-    background-color: white;
-    color: #ff4e61;
+    background-color: #ff69b4;
+    color: white;
     text-decoration: none;
     border-radius: 30px;
     font-weight: bold;
@@ -91,26 +82,21 @@
   
   .btn:hover {
     background-color: #ff4e61;
-    color: white;
   }
   
-  /* =========================
-     📱 RESPONSIVE
-     ========================= */
+  /* Responsive Adjustments */
   @media (max-width: 600px) {
+    nav {
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  
     main.home h1 {
       font-size: 2.2rem;
     }
   
     .countdown {
       font-size: 1rem;
-    }
-  
-    nav {
-      flex-direction: column;
-      gap: 0.5rem;
-      top: 10px;
-      padding: 10px 15px;
     }
   }
   
