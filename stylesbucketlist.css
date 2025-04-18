@@ -5,6 +5,7 @@ body {
   color: #333;
 }
 
+/* ============ NAVIGATION STYLES ============ */
 nav {
   background: linear-gradient(to right, #ffafcc, #ffc8dd);
   padding: 1rem 2rem;
@@ -33,6 +34,7 @@ nav a:hover {
   background-color: #ff85c1;
   transform: scale(1.05);
 }
+
 
 main.bucket {
   padding: 2rem;
