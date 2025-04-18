@@ -2,22 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Login | Our Love Story ❤️</title>
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styleslogin.css" />
   <script>
-    // Prevent caching the login page to prevent back button navigation after logout
-    window.onload = function() {
+    // If already logged in, go to homepage directly
+    window.onload = function () {
       if (localStorage.getItem("loggedInUser")) {
-        window.location.href = "index.html"; // Redirect to the index page if already logged in
+        window.location.href = "index.html";
       }
     };
   </script>
 </head>
 <body>
   <div class="login-container">
-    <h2>Login</h2>
+    <h2>Welcome Back 💖</h2>
     <form id="login-form">
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
@@ -25,7 +25,6 @@
       <button type="submit">Login</button>
     </form>
   </div>
-
   <script src="login.js"></script>
 </body>
 </html>
