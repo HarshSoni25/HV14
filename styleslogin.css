@@ -1,67 +1,77 @@
 body {
-    margin: 0;
-    padding: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ffe0ec, #ffc8dd);
+    background: #f8f8f8;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
-  }
-  
-  .login-container {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 25px;
-    box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
-    text-align: center;
-    animation: popUp 0.7s ease-out;
-  }
-  
-  .login-container h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.5rem;
-    color: #d6336c;
-    margin-bottom: 20px;
-  }
-  
-  #login-form {
-    display: flex;
+    margin: 0;
     flex-direction: column;
-    gap: 15px;
+  }
+  
+  #login-container {
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  h2 {
+    font-family: 'Great Vibes', cursive;
+    color: #d6336c;
+    margin-bottom: 2rem;
   }
   
   input {
-    padding: 12px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    border-radius: 12px;
-    font-size: 1rem;
   }
   
   button {
-    padding: 12px;
-    background-color: #ff69b4;
-    color: white;
+    width: 100%;
+    padding: 10px;
+    background: #ff69b4;
     border: none;
-    border-radius: 12px;
+    border-radius: 5px;
+    color: white;
     font-weight: bold;
     cursor: pointer;
-    font-size: 1rem;
     transition: background 0.3s ease;
   }
   
   button:hover {
-    background-color: #ff4e7a;
+    background: #ff4e7a;
   }
   
-  .error {
+  #error-msg {
     color: red;
-    margin-top: 10px;
+    font-size: 0.9rem;
   }
   
-  @keyframes popUp {
-    0% { transform: scale(0.8); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+  #avatar-container {
+    margin-top: 20px;
+  }
+  
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .avatar:hover {
+    transform: scale(1.1);
+  }
+  
+  h3 {
+    color: #ff69b4;
+    font-size: 1.2rem;
   }
   
