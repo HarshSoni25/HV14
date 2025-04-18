@@ -2,29 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login | Our Love Story ❤️</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <title>Login to Our Love Story</title>
   <link rel="stylesheet" href="styleslogin.css" />
-  <script>
-    // If already logged in, go to homepage directly
-    window.onload = function () {
-      if (localStorage.getItem("loggedInUser")) {
-        window.location.href = "index.html";
-      }
-    };
-  </script>
 </head>
 <body>
   <div class="login-container">
-    <h2>Welcome Back 💖</h2>
+    <h1>Welcome Back 💖</h1>
     <form id="login-form">
       <input type="text" id="username" placeholder="Username" required />
       <input type="password" id="password" placeholder="Password" required />
-      <p id="error-msg" style="color: red;"></p>
       <button type="submit">Login</button>
+      <p id="error-msg"></p>
     </form>
   </div>
+
   <script src="login.js"></script>
 </body>
 </html>

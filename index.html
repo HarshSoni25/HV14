@@ -67,33 +67,40 @@
     window.location.href = "login.html";
   }
 
-  // Optional: Logout functionality
   function logout() {
     localStorage.removeItem("loggedInUser");
     window.location.replace("login.html");
   }
 
-  // Optional: Add welcome text and logout button dynamically
   document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector("nav");
+
     if (nav && user) {
+      const container = document.createElement("div");
+      container.style.marginLeft = "auto";
+      container.style.display = "flex";
+      container.style.alignItems = "center";
+      container.style.gap = "15px";
+
       const welcomeText = document.createElement("span");
       welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
-      welcomeText.style.marginLeft = "auto";
       welcomeText.style.color = "white";
+      welcomeText.style.fontWeight = "bold";
 
       const logoutBtn = document.createElement("a");
       logoutBtn.href = "#";
       logoutBtn.textContent = "Logout";
-      logoutBtn.style.marginLeft = "10px";
+      logoutBtn.style.color = "white";
+      logoutBtn.style.textDecoration = "none";
+      logoutBtn.style.fontWeight = "bold";
       logoutBtn.addEventListener("click", logout);
 
-      nav.appendChild(welcomeText);
-      nav.appendChild(logoutBtn);
+      container.appendChild(welcomeText);
+      container.appendChild(logoutBtn);
+      nav.appendChild(container);
     }
   });
 </script>
-
 
 </body>
 </html>
