@@ -9,83 +9,57 @@
 </head>
 <body>
 
-<script>
-  // Ensure user is logged in or redirect to login page if not
-  const loggedInUser = localStorage.getItem("loggedInUser");
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="relationship.html">Relationship</a>
+    <a href="memories.html">Memories</a>
+    <a href="agreement.html">Agreement</a>
+    <a href="bucketlist.html">Bucket List</a>
+    <a href="chatbox.html">Monthly Chat Box</a>
+    <a href="goals.html">Dreams & Goals</a>
+    <a href="countdown.html">Countdowns</a>
+    <a href="playlist.html">Playlist</a>
+    <a href="letter.html">Letter of Appreciation</a>
+    <a href="gratitude.html">Gratitude Wall</a>
+    <a href="chat.html">chatting box</a>
+  </nav>
 
-  // If no user is logged in, redirect to login page
-  if (!loggedInUser) {
-    window.location.href = "login.html"; // Redirect to login page if not logged in
-  }
+  <main class="home">
+    <h1>Welcome to Our Love Story 💖</h1>
+    <p>This is our personal space to celebrate our love, dreams, memories, and everything in between. Handcrafted with love, just for us.</p>
 
-  // Display the user's welcome message after login
-  document.getElementById("welcome-msg").textContent = `Welcome, ${loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1)}!`;
+    <div class="countdown">
+      Next Special Moment in: <span id="countdown">Loading...</span>
+    </div>
 
-  // Set up the logout action
-  document.getElementById("logout-btn").addEventListener("click", function () {
-    localStorage.removeItem("loggedInUser"); // Remove user from localStorage
-    window.location.href = "login.html"; // Redirect to login page
-  });
-</script>
+    <a class="btn" href="memories.html">Explore Our Memories 📸</a>
+  </main>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="about.html">About Us</a>
-  <a href="relationship.html">Relationship</a>
-  <a href="memories.html">Memories</a>
-  <a href="agreement.html">Agreement</a>
-  <a href="bucketlist.html">Bucket List</a>
-  <a href="chatbox.html">Monthly Chat Box</a>
-  <a href="goals.html">Dreams & Goals</a>
-  <a href="countdown.html">Countdowns</a>
-  <a href="playlist.html">Playlist</a>
-  <a href="letter.html">Letter of Appreciation</a>
-  <a href="gratitude.html">Gratitude Wall</a>
-  <a href="chat.html">Chatting Box</a>
-  <a href="javascript:void(0);" id="logout-btn">Logout</a> <!-- Logout button -->
-</nav>
+  <script>
+    function countdownTimer() {
+      const eventDate = new Date("2025-05-14 00:00:00").getTime();
+      const timer = setInterval(() => {
+        const now = new Date().getTime();
+        const timeLeft = eventDate - now;
 
-<main class="home">
-  <h1>Welcome to Our Love Story 💖</h1>
-  <p>This is our personal space to celebrate our love, dreams, memories, and everything in between. Handcrafted with love, just for us.</p>
+        if (timeLeft < 0) {
+          document.getElementById("countdown").innerHTML = "It's today! 🎉";
+          clearInterval(timer);
+          return;
+        }
 
-  <div class="countdown">
-    Next Special Moment in: <span id="countdown">Loading...</span>
-  </div>
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-  <a class="btn" href="memories.html">Explore Our Memories 📸</a>
+        document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;;
+      }, 1000);
+    }
 
-  <!-- Welcome message after login -->
-  <div id="welcome-section">
-    <p id="welcome-msg"></p>
-  </div>
-</main>
-
-<script>
-  // Countdown function
-  function countdownTimer() {
-    const eventDate = new Date("2025-05-14 00:00:00").getTime();
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const timeLeft = eventDate - now;
-
-      if (timeLeft < 0) {
-        document.getElementById("countdown").innerHTML = "It's today! 🎉";
-        clearInterval(timer);
-        return;
-      }
-
-      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-      document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  }
-
-  countdownTimer();
-</script>
+    countdownTimer();
+  </script>
 
 </body>
 </html>
