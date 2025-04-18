@@ -23,8 +23,8 @@
 
   // Log out functionality
   document.getElementById("logout-btn").addEventListener("click", function () {
-    localStorage.removeItem("loggedInUser");
-    window.location.href = "login.html"; // Redirect to login page on logout
+    localStorage.removeItem("loggedInUser");  // Remove the user from local storage
+    window.location.href = "login.html";  // Redirect to the login page
   });
 </script>
 
