@@ -3,7 +3,7 @@
    ========================= */
    body {
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     background: linear-gradient(to right, #fff0f6, #ffe0ec);
     color: rgb(83, 18, 68);
     text-align: center;
