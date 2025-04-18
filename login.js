@@ -6,8 +6,8 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
     const errorMsg = document.getElementById("error-msg");
   
     const validUsers = {
-      harsh: "harshpass",
-      vini: "vinipass"
+      harsh: "lovesvini",
+      vini: "lovesharsh"
     };
   
     if (validUsers[username] === password) {
