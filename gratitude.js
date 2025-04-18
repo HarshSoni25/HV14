@@ -1,49 +1,42 @@
-// Import Firebase
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy
-} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
 
-// Firebase Config
+// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
-  authDomain: "hv14-b967f.firebaseapp.com",
-  projectId: "hv14-b967f",
-  storageBucket: "hv14-b967f.appspot.com",
-  messagingSenderId: "866538586375",
-  appId: "1:866538586375:web:6af88deeb3ee83536385a2"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  databaseURL: "YOUR_DB_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_BUCKET",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const gratitudeRef = collection(db, "gratitudeWall");
+const db = getDatabase(app);
+const gratitudeRef = ref(db, "gratitudeEntries");
 
-// DOM elements
-const input = document.getElementById("gratitudeInput");
-const addBtn = document.getElementById("addGratitude");
+const form = document.getElementById("gratitudeForm");
 const wall = document.getElementById("gratitudeWall");
 
-// Add gratitude note
-addBtn.addEventListener("click", async () => {
-  const text = input.value.trim();
-  if (text) {
-    await addDoc(gratitudeRef, {
-      text,
-      createdAt: serverTimestamp()
-    });
-    input.value = "";
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const author = document.getElementById("authorInput").value.trim();
+  const message = document.getElementById("gratitudeInput").value.trim();
+  if (author && message) {
+    push(gratitudeRef, { author, message });
+    form.reset();
   }
 });
 
-// Display notes in real-time
-const q = query(gratitudeRef, orderBy("createdAt"));
-onSnapshot(q, (snapshot) => {
-  wall.innerHTML = "";
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    const note = document.createElement("div");
-    note.classList.add("note");
-    note.textContent = data.text;
-    wall.appendChild(note);
-  });
+onChildAdded(gratitudeRef, (data) => {
+  const entry = data.val();
+  const note = document.createElement("div");
+  note.classList.add("note");
+  note.innerHTML = `
+    <div>${entry.message}</div>
+    <div class="author">– ${entry.author}</div>
+  `;
+  wall.appendChild(note);
 });

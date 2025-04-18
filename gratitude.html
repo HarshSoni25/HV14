@@ -1,46 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gratitude Wall</title>
-  <link rel="stylesheet" href="stylesgratitudewall.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="stylesgratitude.css" />
+  <script type="module" src="gratitude-firebase.js" defer></script>
 </head>
 <body>
-
-  <!-- Navigation Bar -->
   <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
-    <a href="relationship.html">Relationship</a>
+    <a href="relationship.html">Our Relationship</a>
     <a href="agreement.html">Agreement</a>
-    <a href="photos.html">Photos</a>
-    <a href="chat.html">Chat Box</a>
+    <a href="photos.html">Memories</a>
     <a href="bucketlist.html">Bucket List</a>
-    <a href="goals.html">Dreams & Goals</a>
-    <a href="countdown.html">Countdown</a>
+    <a href="chatbox.html">Chat Box</a>
+    <a href="dreams.html">Dreams & Goals</a>
     <a href="appreciation.html">Appreciation</a>
-    <a href="gratitude.html">Gratitude Wall</a>
+    <a href="gratitudewall.html">Gratitude Wall</a>
   </nav>
 
   <main class="gratitude">
-    <h1>Our Gratitude Wall</h1>
-    <div class="intro">
-      A space to remember all the things we’re grateful for 💕
-    </div>
+    <h1>Gratitude Wall</h1>
+    <p class="intro">A space to celebrate little joys and moments 🌸</p>
 
-    <!-- Input Form -->
-    <div class="gratitude-form">
-      <textarea id="gratitudeInput" placeholder="Write something you're grateful for..."></textarea>
-      <button id="addGratitude">Add</button>
-    </div>
+    <form id="gratitudeForm">
+      <input type="text" id="authorInput" placeholder="Your name" required />
+      <input type="text" id="gratitudeInput" placeholder="What are you grateful for?" required />
+      <button type="submit">Add</button>
+    </form>
 
-    <!-- Notes Wall -->
     <div class="wall" id="gratitudeWall"></div>
   </main>
-
-  <!-- Firebase Script -->
-  <script type="module" src="gratitude.js"></script>
-
 </body>
 </html>

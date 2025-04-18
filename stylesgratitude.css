@@ -1,49 +1,133 @@
-/* Input Box and Button Styling */
-.gratitude-form {
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.gratitude-form textarea {
-  width: 100%;
-  max-width: 600px;
-  height: 100px;
-  padding: 1rem;
-  border-radius: 12px;
-  border: 1px solid #ffc0cb;
-  font-size: 1rem;
+body {
   font-family: 'Poppins', sans-serif;
-  resize: none;
-  margin-bottom: 1rem;
-  background-color: #fff0f6;
-  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.1);
+  margin: 0;
+  background: #fff0f5;
+  color: #333;
 }
 
-.gratitude-form button {
+nav {
+  background-color: #ff8fab;
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  font-weight: 500;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  background: #ff69b4;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+nav a:hover {
+  background: #e75480;
+}
+
+main.gratitude {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background: linear-gradient(to right, #fff0f6, #ffe0ec);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15);
+  animation: fadeIn 1s ease-in-out;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+main.gratitude h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3.5rem;
+  color: #d6336c;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px #ffc9de;
+}
+
+.intro {
+  font-size: 1.2rem;
+  color: #444;
+  margin-bottom: 2.5rem;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+form input, form button {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: 'Poppins', sans-serif;
+}
+
+form input {
+  min-width: 200px;
+}
+
+form button {
   background-color: #ff69b4;
   color: white;
+  cursor: pointer;
   font-weight: bold;
   border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
 }
 
-.gratitude-form button:hover {
-  background-color: #ff85c1;
-  transform: scale(1.05);
+form button:hover {
+  background-color: #ff4e61;
 }
 
-/* Note Animation */
+.wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
 .note {
-  animation: popIn 0.4s ease;
+  background: #fff;
+  border-left: 5px solid #f06595;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+  padding: 1.2rem 1.5rem;
+  max-width: 300px;
+  font-size: 1rem;
+  position: relative;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  animation: dropIn 0.5s ease forwards;
 }
 
-@keyframes popIn {
-  0% { opacity: 0; transform: scale(0.8); }
-  100% { opacity: 1; transform: scale(1); }
+.note:hover {
+  transform: scale(1.03);
+}
+
+.note .author {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 10px;
+  font-style: italic;
+  text-align: right;
+}
+
+@keyframes dropIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
