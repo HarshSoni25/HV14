@@ -14,6 +14,21 @@
   /* =========================
      🌈 NAVIGATION BAR
      ========================= */
+
+     /* Style for the logout button in the navigation */
+#logout-btn {
+  color: white; /* Matches the text color of the nav links */
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: #ff3b3b; /* Change this color to fit your theme */
+  border-radius: 5px;
+}
   nav {
     position: fixed;
     top: 0;
