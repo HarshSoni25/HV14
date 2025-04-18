@@ -9,18 +9,21 @@
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="relationship.html">Relationship</a>
-    <a href="memories.html">Memories</a>
-    <a href="agreement.html">Agreement</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="chat.html">Chat Box</a>
-    <a href="goals.html">Goals</a>
-    <a href="countdowns.html">Countdowns</a>
-    <a href="playlist.html">Playlist</a>
-    <a href="loa.html">Letter of Appreciation</a>
-    <a href="gratitude.html">Gratitude Wall</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="relationship.html">Relationship</a>
+      <a href="memories.html">Memories</a>
+      <a href="agreement.html">Agreement</a>
+      <a href="bucketlist.html">Bucket List</a>
+      <a href="chat.html">Chat Box</a>
+      <a href="goals.html">Goals</a>
+      <a href="countdowns.html">Countdowns</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="loa.html">Letter of Appreciation</a>
+      <a href="gratitude.html">Gratitude Wall</a>
+    </div>
+    <div class="user-info" id="user-info" style="margin-left: auto; display: flex; align-items: center; gap: 15px; padding-right: 15px;"></div>
   </nav>
 
   <main class="bucket">
@@ -42,39 +45,33 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Set username input automatically
+      // Auto-fill username
       const usernameInput = document.getElementById("username");
       if (usernameInput && user) {
         usernameInput.value = user;
       }
 
-      const nav = document.querySelector("nav");
-      if (nav && user) {
-        const container = document.createElement("div");
-        container.style.marginRight = "20px";
-        container.style.display = "flex";
-        container.style.alignItems = "center";
-        container.style.gap = "15px";
+      // Add user welcome and logout without changing nav style
+      const userInfoDiv = document.getElementById("user-info");
+      if (userInfoDiv && user) {
+        const welcomeSpan = document.createElement("span");
+        welcomeSpan.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
+        welcomeSpan.style.color = "black";
+        welcomeSpan.style.fontWeight = "bold";
 
-        const welcomeText = document.createElement("span");
-        welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
-        welcomeText.style.color = "black";
-        welcomeText.style.fontWeight = "bold";
-
-        const logoutBtn = document.createElement("a");
-        logoutBtn.href = "#";
-        logoutBtn.textContent = "Logout";
-        logoutBtn.style.color = "white";
-        logoutBtn.style.textDecoration = "none";
-        logoutBtn.style.fontWeight = "bold";
-        logoutBtn.addEventListener("click", () => {
+        const logoutLink = document.createElement("a");
+        logoutLink.href = "#";
+        logoutLink.textContent = "Logout";
+        logoutLink.style.color = "white";
+        logoutLink.style.textDecoration = "none";
+        logoutLink.style.fontWeight = "bold";
+        logoutLink.addEventListener("click", () => {
           localStorage.removeItem("loggedInUser");
           window.location.replace("login.html");
         });
 
-        container.appendChild(welcomeText);
-        container.appendChild(logoutBtn);
-        nav.appendChild(container);
+        userInfoDiv.appendChild(welcomeSpan);
+        userInfoDiv.appendChild(logoutLink);
       }
     });
   </script>
