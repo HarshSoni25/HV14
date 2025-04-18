@@ -1,42 +1,47 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy
+} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
 
-// Your Firebase configuration
+// Firebase Config
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_DOMAIN",
-  databaseURL: "YOUR_DB_URL",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_BUCKET",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
+  authDomain: "hv14-b967f.firebaseapp.com",
+  projectId: "hv14-b967f",
+  storageBucket: "hv14-b967f.appspot.com",
+  messagingSenderId: "866538586375",
+  appId: "1:866538586375:web:6af88deeb3ee83536385a2"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-const gratitudeRef = ref(db, "gratitudeEntries");
+const db = getFirestore(app);
+const gratitudeRef = collection(db, "gratitude");
 
-const form = document.getElementById("gratitudeForm");
-const wall = document.getElementById("gratitudeWall");
+const form = document.getElementById("gratitude-form");
+const input = document.getElementById("gratitude-input");
+const wall = document.getElementById("gratitude-wall");
 
-form.addEventListener("submit", (e) => {
+form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const author = document.getElementById("authorInput").value.trim();
-  const message = document.getElementById("gratitudeInput").value.trim();
-  if (author && message) {
-    push(gratitudeRef, { author, message });
-    form.reset();
+  const text = input.value.trim();
+  if (text) {
+    await addDoc(gratitudeRef, {
+      text,
+      createdAt: serverTimestamp()
+    });
+    input.value = "";
   }
 });
 
-onChildAdded(gratitudeRef, (data) => {
-  const entry = data.val();
-  const note = document.createElement("div");
-  note.classList.add("note");
-  note.innerHTML = `
-    <div>${entry.message}</div>
-    <div class="author">– ${entry.author}</div>
-  `;
-  wall.appendChild(note);
+const q = query(gratitudeRef, orderBy("createdAt"));
+
+onSnapshot(q, (snapshot) => {
+  wall.innerHTML = "";
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const note = document.createElement("div");
+    note.classList.add("note");
+    note.textContent = data.text;
+    wall.appendChild(note);
+  });
 });
