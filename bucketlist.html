@@ -26,7 +26,7 @@
   <main class="bucket">
     <h1>🎯 Our Shared Bucket List</h1>
     <form id="bucket-form">
-      <input type="text" id="username" placeholder="Your Name" required />
+      <input type="hidden" id="username" required />
       <input type="text" id="item" placeholder="Add a new bucket list item..." required />
       <button type="submit">➕ Add</button>
     </form>
@@ -40,41 +40,43 @@
     if (!user) {
       window.location.href = "login.html";
     }
-  
-    function logout() {
-      localStorage.removeItem("loggedInUser");
-      window.location.replace("login.html");
-    }
-  
+
     document.addEventListener("DOMContentLoaded", () => {
+      // Set username input automatically
+      const usernameInput = document.getElementById("username");
+      if (usernameInput && user) {
+        usernameInput.value = user;
+      }
+
       const nav = document.querySelector("nav");
-  
       if (nav && user) {
         const container = document.createElement("div");
-        container.style.marginRight = "20px"; // Slightly left from the edge
+        container.style.marginRight = "20px";
         container.style.display = "flex";
         container.style.alignItems = "center";
         container.style.gap = "15px";
-  
+
         const welcomeText = document.createElement("span");
         welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
         welcomeText.style.color = "black";
         welcomeText.style.fontWeight = "bold";
-  
+
         const logoutBtn = document.createElement("a");
         logoutBtn.href = "#";
         logoutBtn.textContent = "Logout";
         logoutBtn.style.color = "white";
         logoutBtn.style.textDecoration = "none";
         logoutBtn.style.fontWeight = "bold";
-        logoutBtn.addEventListener("click", logout);
-  
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("loggedInUser");
+          window.location.replace("login.html");
+        });
+
         container.appendChild(welcomeText);
         container.appendChild(logoutBtn);
         nav.appendChild(container);
       }
     });
   </script>
-  
 </body>
 </html>
