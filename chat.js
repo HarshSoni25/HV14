@@ -14,6 +14,7 @@ const firebaseConfig = {
   appId: "1:866538586375:web:6af88deeb3ee83536385a2"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const messagesRef = collection(db, "messages");
@@ -40,13 +41,15 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-// Listen for new messages
-const q = query(messagesRef, orderBy("createdAt"));
+// Listen for new messages (fix applied here with ascending order)
+const q = query(messagesRef, orderBy("createdAt", "asc"));
 
 onSnapshot(q, (snapshot) => {
   messagesDiv.innerHTML = "";
+
   snapshot.forEach((doc) => {
     const data = doc.data();
+    if (!data.text || !data.username) return;
 
     const messageElement = document.createElement("div");
     messageElement.classList.add("message");
@@ -54,14 +57,16 @@ onSnapshot(q, (snapshot) => {
     const meta = document.createElement("span");
     meta.classList.add("meta");
 
-    // Safe timestamp handling
+    // Show timestamp if available, else fallback
     let timeStr = "Just now";
     if (data.createdAt?.toDate) {
       const timestamp = data.createdAt.toDate();
       timeStr = timestamp.toLocaleString();
+    } else {
+      timeStr = new Date().toLocaleString();
     }
 
-    meta.textContent = `${data.username || "Unknown"} • ${timeStr}`;
+    meta.textContent = `${data.username} • ${timeStr}`;
 
     const text = document.createElement("p");
     text.textContent = data.text;
@@ -71,6 +76,5 @@ onSnapshot(q, (snapshot) => {
     messagesDiv.appendChild(messageElement);
   });
 
-  // Auto scroll to latest message
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 });

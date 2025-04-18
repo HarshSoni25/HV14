@@ -1,0 +1,49 @@
+/* Input Box and Button Styling */
+.gratitude-form {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gratitude-form textarea {
+  width: 100%;
+  max-width: 600px;
+  height: 100px;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid #ffc0cb;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  resize: none;
+  margin-bottom: 1rem;
+  background-color: #fff0f6;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.1);
+}
+
+.gratitude-form button {
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+}
+
+.gratitude-form button:hover {
+  background-color: #ff85c1;
+  transform: scale(1.05);
+}
+
+/* Note Animation */
+.note {
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
