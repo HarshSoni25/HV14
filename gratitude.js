@@ -1,47 +1,50 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, onSnapshot, serverTimestamp, query, orderBy
-} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js";
-
-// Firebase Config
-const firebaseConfig = {
-  apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
-  authDomain: "hv14-b967f.firebaseapp.com",
-  projectId: "hv14-b967f",
-  storageBucket: "hv14-b967f.appspot.com",
-  messagingSenderId: "866538586375",
-  appId: "1:866538586375:web:6af88deeb3ee83536385a2"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const gratitudeRef = collection(db, "gratitude");
-
 const form = document.getElementById("gratitude-form");
-const input = document.getElementById("gratitude-input");
+const nameInput = document.getElementById("name-input");
+const gratitudeInput = document.getElementById("gratitude-input");
 const wall = document.getElementById("gratitude-wall");
 
-form.addEventListener("submit", async (e) => {
+// Load existing messages from localStorage
+document.addEventListener("DOMContentLoaded", () => {
+  const notes = JSON.parse(localStorage.getItem("gratitudeNotes")) || [];
+  notes.forEach(addNoteToWall);
+});
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const text = input.value.trim();
-  if (text) {
-    await addDoc(gratitudeRef, {
-      text,
-      createdAt: serverTimestamp()
-    });
-    input.value = "";
+
+  const name = nameInput.value.trim();
+  const text = gratitudeInput.value.trim();
+
+  if (name && text) {
+    const note = { name, text, timestamp: new Date().toISOString() };
+    saveNoteToLocalStorage(note);
+    addNoteToWall(note);
+    nameInput.value = "";
+    gratitudeInput.value = "";
   }
 });
 
-const q = query(gratitudeRef, orderBy("createdAt"));
+function saveNoteToLocalStorage(note) {
+  const notes = JSON.parse(localStorage.getItem("gratitudeNotes")) || [];
+  notes.unshift(note); // Add new note to the top
+  localStorage.setItem("gratitudeNotes", JSON.stringify(notes));
+}
 
-onSnapshot(q, (snapshot) => {
-  wall.innerHTML = "";
-  snapshot.forEach((doc) => {
-    const data = doc.data();
-    const note = document.createElement("div");
-    note.classList.add("note");
-    note.textContent = data.text;
-    wall.appendChild(note);
-  });
-});
+function addNoteToWall(note) {
+  const noteDiv = document.createElement("div");
+  noteDiv.classList.add("note");
+
+  const textEl = document.createElement("p");
+  textEl.textContent = note.text;
+
+  const nameEl = document.createElement("span");
+  nameEl.textContent = `— ${note.name}`;
+  nameEl.style.display = "block";
+  nameEl.style.marginTop = "0.5rem";
+  nameEl.style.fontWeight = "bold";
+  nameEl.style.color = "#d6336c";
+
+  noteDiv.appendChild(textEl);
+  noteDiv.appendChild(nameEl);
+  wall.appendChild(noteDiv);
+}
