@@ -9,21 +9,18 @@
 </head>
 <body>
   <nav>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="relationship.html">Relationship</a>
-      <a href="memories.html">Memories</a>
-      <a href="agreement.html">Agreement</a>
-      <a href="bucketlist.html">Bucket List</a>
-      <a href="chat.html">Chat Box</a>
-      <a href="goals.html">Goals</a>
-      <a href="countdowns.html">Countdowns</a>
-      <a href="playlist.html">Playlist</a>
-      <a href="loa.html">Letter of Appreciation</a>
-      <a href="gratitude.html">Gratitude Wall</a>
-    </div>
-    <div class="user-info" id="user-info" style="margin-left: auto; display: flex; align-items: center; gap: 15px; padding-right: 15px;"></div>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="relationship.html">Relationship</a>
+    <a href="memories.html">Memories</a>
+    <a href="agreement.html">Agreement</a>
+    <a href="bucketlist.html">Bucket List</a>
+    <a href="chat.html">Chat Box</a>
+    <a href="goals.html">Goals</a>
+    <a href="countdowns.html">Countdowns</a>
+    <a href="playlist.html">Playlist</a>
+    <a href="loa.html">Letter of Appreciation</a>
+    <a href="gratitude.html">Gratitude Wall</a>
   </nav>
 
   <main class="bucket">
@@ -44,34 +41,36 @@
       window.location.href = "login.html";
     }
 
+    // Auto-fill hidden username input
     document.addEventListener("DOMContentLoaded", () => {
-      // Auto-fill username
       const usernameInput = document.getElementById("username");
-      if (usernameInput && user) {
+      if (usernameInput) {
         usernameInput.value = user;
       }
 
-      // Add user welcome and logout without changing nav style
-      const userInfoDiv = document.getElementById("user-info");
-      if (userInfoDiv && user) {
-        const welcomeSpan = document.createElement("span");
-        welcomeSpan.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
-        welcomeSpan.style.color = "black";
-        welcomeSpan.style.fontWeight = "bold";
+      // Add welcome + logout link without affecting nav styling
+      const nav = document.querySelector("nav");
+      if (nav && user) {
+        const span = document.createElement("span");
+        span.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
+        span.style.color = "black";
+        span.style.fontWeight = "bold";
+        span.style.marginLeft = "15px";
 
-        const logoutLink = document.createElement("a");
-        logoutLink.href = "#";
-        logoutLink.textContent = "Logout";
-        logoutLink.style.color = "white";
-        logoutLink.style.textDecoration = "none";
-        logoutLink.style.fontWeight = "bold";
-        logoutLink.addEventListener("click", () => {
+        const logout = document.createElement("a");
+        logout.textContent = "Logout";
+        logout.href = "#";
+        logout.style.marginLeft = "10px";
+        logout.style.color = "white";
+        logout.style.fontWeight = "bold";
+        logout.style.textDecoration = "none";
+        logout.addEventListener("click", () => {
           localStorage.removeItem("loggedInUser");
-          window.location.replace("login.html");
+          window.location.href = "login.html";
         });
 
-        userInfoDiv.appendChild(welcomeSpan);
-        userInfoDiv.appendChild(logoutLink);
+        nav.appendChild(span);
+        nav.appendChild(logout);
       }
     });
   </script>
