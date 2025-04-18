@@ -10,21 +10,21 @@
 <body>
 
 <script>
-  // Check if the user is logged in
+  // Ensure user is logged in or redirect to login page if not
   const loggedInUser = localStorage.getItem("loggedInUser");
 
-  // If the user is not logged in, redirect to login page
+  // If no user is logged in, redirect to login page
   if (!loggedInUser) {
-    window.location.href = "login.html"; // Redirect if not logged in
+    window.location.href = "login.html"; // Redirect to login page if not logged in
   }
 
-  // Display the user's welcome message if logged in
+  // Display the user's welcome message after login
   document.getElementById("welcome-msg").textContent = `Welcome, ${loggedInUser.charAt(0).toUpperCase() + loggedInUser.slice(1)}!`;
 
-  // Log out functionality
+  // Set up the logout action
   document.getElementById("logout-btn").addEventListener("click", function () {
-    localStorage.removeItem("loggedInUser");  // Remove the user from local storage
-    window.location.href = "login.html";  // Redirect to the login page
+    localStorage.removeItem("loggedInUser"); // Remove user from localStorage
+    window.location.href = "login.html"; // Redirect to login page
   });
 </script>
 
@@ -42,7 +42,7 @@
   <a href="letter.html">Letter of Appreciation</a>
   <a href="gratitude.html">Gratitude Wall</a>
   <a href="chat.html">Chatting Box</a>
-  <a href="login.html">Logout</a> <!-- Logout button -->
+  <a href="javascript:void(0);" id="logout-btn">Logout</a> <!-- Logout button -->
 </nav>
 
 <main class="home">
@@ -55,13 +55,14 @@
 
   <a class="btn" href="memories.html">Explore Our Memories 📸</a>
 
-  <!-- Welcome section -->
+  <!-- Welcome message after login -->
   <div id="welcome-section">
     <p id="welcome-msg"></p>
   </div>
 </main>
 
 <script>
+  // Countdown function
   function countdownTimer() {
     const eventDate = new Date("2025-05-14 00:00:00").getTime();
     const timer = setInterval(() => {
