@@ -14,23 +14,22 @@
   /* =========================
      🌈 NAVIGATION BAR
      ========================= */
-
-     /* Style for the logout button in the navigation */
-/* Style for the logout button in the navigation */
-#logout-btn {
-  color: white; /* Matches the text color of the nav links */
-  text-decoration: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-#logout-btn:hover {
-  background-color: #ff3b3b; /* Change this color to fit your theme */
-  border-radius: 5px;
-}
-
+  
+  /* Style for the logout button in the navigation */
+  #logout-btn {
+    color: white; /* Matches the text color of the nav links */
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #logout-btn:hover {
+    background-color: #ff3b3b; /* Change this color to fit your theme */
+    border-radius: 5px;
+  }
+  
   nav {
     position: fixed;
     top: 0;
@@ -44,15 +43,22 @@
     z-index: 999;
     backdrop-filter: blur(10px);
     flex-wrap: wrap;
+    animation: slideDown 1s ease-out; /* ✅ added animation */
+  }
+  
+  @keyframes slideDown {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
   }
   
   nav a {
     text-decoration: none;
     color: white;
     background: #ff69b4;
-    padding: 10px 15px;
+    padding: 10px 18px;
     border-radius: 10px;
     transition: 0.3s;
+    font-size: 1rem; /* ✅ matched font size */
   }
   
   nav a:hover {
