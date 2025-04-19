@@ -32,7 +32,7 @@
       <input type="file" id="imageInput" accept="image/*">
       <input type="text" id="titleInput" placeholder="Title (e.g. 'Anniversary Night')">
       <input type="text" id="descInput" placeholder="Short Description">
-      <button onclick="addMemory()">Add Memory</button>
+      <button id="addMemoryBtn">Add Memory</button>
     </section>
 
     <!-- Memory Gallery -->
@@ -51,7 +51,7 @@
       apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
       authDomain: "hv14-b967f.firebaseapp.com",
       projectId: "hv14-b967f",
-      storageBucket: "hv14-b967f.firebasestorage.app",
+      storageBucket: "hv14-b967f.appspot.com",
       messagingSenderId: "866538586375",
       appId: "1:866538586375:web:6af88deeb3ee83536385a2"
     };
@@ -94,6 +94,9 @@
         container.appendChild(logoutBtn);
         nav.appendChild(container);
       }
+
+      // Attach the button event here
+      document.getElementById("addMemoryBtn").addEventListener("click", addMemory);
 
       displayMemories();
     });
