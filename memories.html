@@ -5,38 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Memories</title>
   <link rel="stylesheet" href="stylesmemories.css"/>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 <body>
-  <div class="navbar">
+  <nav class="navbar">
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="relationship.html">Relationship</a>
     <a href="memories.html" class="active">Memories</a>
     <a href="agreement.html">Agreement</a>
     <a href="bucketlist.html">Bucket List</a>
-    <a href="dreamsgoals.html">Dreams & Goals</a>
+    <a href="dreams.html">Dreams & Goals</a>
     <a href="countdowns.html">Countdowns</a>
     <a href="playlist.html">Playlist</a>
     <a href="appreciation.html">Letter of Appreciation</a>
     <a href="gratitude.html">Gratitude Wall</a>
     <a href="chat.html">chatting box</a>
-    <span id="welcomeUser"></span>
-    <button onclick="logout()" class="logout-btn">Logout</button>
-  </div>
+    <span class="greeting">Welcome, <strong id="username">Harsh!</strong></span>
+    <button id="logoutBtn">Logout</button>
+  </nav>
 
   <h1 class="page-title">Our Cherished Memories</h1>
 
-  <div class="memory-form-container">
+  <div class="memory-form">
     <h2>Add a New Memory 🥰</h2>
-    <form id="memoryForm">
-      <input type="file" id="memoryImage" accept="image/*" required/>
-      <input type="text" id="memoryTitle" placeholder="Title" required/>
-      <input type="text" id="memoryCaption" placeholder="Caption" required/>
-      <button type="submit">Add Memory</button>
-    </form>
+    <input type="file" id="imageFile" />
+    <input type="text" id="memoryTitle" placeholder="Title (e.g. 'Anniversary Night')" />
+    <input type="text" id="memoryDesc" placeholder="Short Description" />
+    <button onclick="addMemory()">Add Memory</button>
   </div>
 
-  <div id="memoryGallery" class="gallery"></div>
+  <div class="memory-container" id="memoryContainer"></div>
 
   <script src="memories.js"></script>
 </body>

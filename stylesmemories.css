@@ -1,121 +1,111 @@
+/* stylesmemories.css */
+
 body {
+  font-family: Arial, sans-serif;
+  background-color: #fefefe;
   margin: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(to bottom, #ffd1dc, #ffe6f0);
+  padding: 0;
 }
 
 .navbar {
-  background-color: #ffb6c1;
-  overflow: auto;
-  padding: 10px;
-  text-align: center;
-  border-bottom: 2px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2c3e50;
+  padding: 1rem;
 }
 
 .navbar a {
-  padding: 10px 15px;
-  margin: 5px;
-  background-color: #ff69b4;
-  border-radius: 20px;
   color: white;
   text-decoration: none;
+  margin: 0 10px;
+  font-size: 16px;
+}
+
+.navbar a.active {
   font-weight: bold;
+  text-decoration: underline;
 }
 
-.navbar .active {
-  background-color: hotpink;
-}
-
-.logout-btn {
-  background-color: #ff69b4;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-#welcomeUser {
-  font-weight: bold;
-  margin-left: 15px;
-  color: black;
+.navbar .greeting {
+  margin-left: auto;
+  color: #ecf0f1;
 }
 
 .page-title {
   text-align: center;
-  color: deeppink;
+  margin: 2rem 0 1rem;
   font-size: 2.5rem;
-  margin-top: 30px;
+  color: #34495e;
 }
 
-.memory-form-container {
-  background-color: white;
-  width: 90%;
+.memory-form {
   max-width: 500px;
-  margin: 30px auto;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 0 auto 2rem;
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+.memory-form h2 {
   text-align: center;
+  color: #2c3e50;
 }
 
-.memory-form-container h2 {
-  margin-bottom: 20px;
-  color: #ff1493;
-}
-
-#memoryForm input,
-#memoryForm button {
+.memory-form input[type="file"],
+.memory-form input[type="text"],
+.memory-form button {
   display: block;
   width: 100%;
   margin: 10px 0;
-  padding: 12px;
-  border: 1px solid #ff69b4;
-  border-radius: 10px;
-  font-size: 1rem;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
-#memoryForm button {
-  background-color: #ff69b4;
+.memory-form button {
+  background-color: #3498db;
   color: white;
   border: none;
   cursor: pointer;
-  font-weight: bold;
-  transition: background-color 0.3s;
 }
 
-#memoryForm button:hover {
-  background-color: hotpink;
+.memory-form button:hover {
+  background-color: #2980b9;
 }
 
-.gallery {
+.memory-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 20px;
+  padding: 10px;
+  gap: 20px;
 }
 
 .memory-card {
-  background-color: white;
-  border-radius: 15px;
-  margin: 15px;
-  padding: 10px;
-  width: 200px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  background-color: #fff;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  overflow: hidden;
   text-align: center;
 }
 
 .memory-card img {
-  max-width: 100%;
-  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .memory-card h3 {
   margin: 10px 0 5px;
-  color: #ff1493;
+  color: #2c3e50;
 }
 
 .memory-card p {
-  color: #555;
+  color: #7f8c8d;
+  margin: 0 10px 15px;
 }
