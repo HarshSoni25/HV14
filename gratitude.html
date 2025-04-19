@@ -28,7 +28,7 @@
     <p class="intro">Write down what you're thankful for and see it bloom here 💖</p>
 
     <form id="gratitude-form">
-      <input type="text" id="name-input" placeholder="Your Name..." required />
+      <input type="text" id="name-input" placeholder="Your Name..." required readonly />
       <input type="text" id="gratitude-input" placeholder="I'm grateful for..." required />
       <button type="submit">Add</button>
     </form>
@@ -39,31 +39,38 @@
   <script src="gratitude.js"></script>
 
   <script>
-     const user = sessionStorage.getItem("loggedInUser");
-  if (!user) {
-    window.location.href = "login.html";
-  }
+    const user = sessionStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "login.html";
+    }
 
-  function logout() {
-    sessionStorage.removeItem("loggedInUser");
-    window.location.replace("login.html");
-  }
+    function logout() {
+      sessionStorage.removeItem("loggedInUser");
+      window.location.replace("login.html");
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
+      // Fill in name input
+      const nameInput = document.getElementById("name-input");
+      if (nameInput && user) {
+        nameInput.value = user.charAt(0).toUpperCase() + user.slice(1); // Capitalize
+      }
+
+      // Create welcome + logout
       const nav = document.querySelector("nav");
-  
       if (nav && user) {
         const container = document.createElement("div");
-        container.style.marginRight = "20px"; // Slightly left from the edge
+        container.style.marginLeft = "auto";
         container.style.display = "flex";
         container.style.alignItems = "center";
         container.style.gap = "15px";
-  
+        container.style.marginRight = "20px";
+
         const welcomeText = document.createElement("span");
         welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
         welcomeText.style.color = "black";
         welcomeText.style.fontWeight = "bold";
-  
+
         const logoutBtn = document.createElement("a");
         logoutBtn.href = "#";
         logoutBtn.textContent = "Logout";
@@ -71,13 +78,12 @@
         logoutBtn.style.textDecoration = "none";
         logoutBtn.style.fontWeight = "bold";
         logoutBtn.addEventListener("click", logout);
-  
+
         container.appendChild(welcomeText);
         container.appendChild(logoutBtn);
         nav.appendChild(container);
       }
     });
   </script>
-  
 </body>
 </html>
