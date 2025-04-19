@@ -9,18 +9,23 @@
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About Us</a>
-    <a href="relationship.html">Relationship</a>
-    <a href="memories.html">Memories</a>
-    <a href="agreement.html">Agreement</a>
-    <a href="bucketlist.html">Bucket List</a>
-    <a href="goals.html">Dreams & Goals</a>
-    <a href="countdown.html">Countdowns</a>
-    <a href="playlist.html">Playlist</a>
-    <a href="letter.html">Letter of Appreciation</a>
-    <a href="gratitude.html">Gratitude Wall</a>
-    <a href="chat.html">chatting box</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="relationship.html">Relationship</a>
+      <a href="memories.html" class="active">Memories</a>
+      <a href="agreement.html">Agreement</a>
+      <a href="bucketlist.html">Bucket List</a>
+      <a href="goals.html">Dreams & Goals</a>
+      <a href="countdown.html">Countdowns</a>
+      <a href="playlist.html">Playlist</a>
+      <a href="letter.html">Letter of Appreciation</a>
+      <a href="gratitude.html">Gratitude Wall</a>
+      <a href="chat.html">Chatting Box</a>
+    </div>
+    <div class="user-info" id="userInfo">
+      <!-- Welcome + Logout will be injected by JS -->
+    </div>
   </nav>
 
   <main class="memories">
@@ -32,7 +37,7 @@
       <input type="file" id="imageInput" accept="image/*">
       <input type="text" id="titleInput" placeholder="Title (e.g. 'Anniversary Night')">
       <input type="text" id="descInput" placeholder="Short Description">
-      <button onclick="addMemory()">Add Memory</button>
+      <button id="addMemoryBtn">Add Memory</button>
     </section>
 
     <!-- Memory Gallery -->
@@ -41,51 +46,57 @@
     </section>
   </main>
 
-  <script>
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
+      authDomain: "hv14-b967f.firebaseapp.com",
+      projectId: "hv14-b967f",
+      storageBucket: "hv14-b967f.appspot.com",
+      messagingSenderId: "866538586375",
+      appId: "1:866538586375:web:6af88deeb3ee83536385a2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
     const user = sessionStorage.getItem("loggedInUser");
     if (!user) {
       window.location.href = "login.html";
     }
 
-    function logout() {
-      sessionStorage.removeItem("loggedInUser");
-      window.location.replace("login.html");
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
-      const nav = document.querySelector("nav");
-
-      if (nav && user) {
-        const container = document.createElement("div");
-        container.style.marginRight = "20px";
-        container.style.display = "flex";
-        container.style.alignItems = "center";
-        container.style.gap = "15px";
-
+      const userInfo = document.getElementById("userInfo");
+      if (userInfo && user) {
         const welcomeText = document.createElement("span");
-        welcomeText.textContent = Welcome, $(user.charAt(0).toUpperCase() + user.slice(1));
-        welcomeText.style.color = "black";
+        welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
+        welcomeText.style.marginRight = "15px";
+        welcomeText.style.color = "white";
         welcomeText.style.fontWeight = "bold";
 
-        const logoutBtn = document.createElement("a");
-        logoutBtn.href = "#";
+        const logoutBtn = document.createElement("button");
         logoutBtn.textContent = "Logout";
-        logoutBtn.style.color = "white";
-        logoutBtn.style.textDecoration = "none";
-        logoutBtn.style.fontWeight = "bold";
-        logoutBtn.addEventListener("click", logout);
+        logoutBtn.style.padding = "5px 10px";
+        logoutBtn.style.cursor = "pointer";
+        logoutBtn.onclick = () => {
+          sessionStorage.removeItem("loggedInUser");
+          window.location.href = "login.html";
+        };
 
-        container.appendChild(welcomeText);
-        container.appendChild(logoutBtn);
-        nav.appendChild(container);
+        userInfo.appendChild(welcomeText);
+        userInfo.appendChild(logoutBtn);
       }
 
+      document.getElementById("addMemoryBtn").addEventListener("click", addMemory);
       displayMemories();
     });
 
-    let memoryData = JSON.parse(localStorage.getItem("memories")) || [];
-
-    function addMemory() {
+    async function addMemory() {
       const file = document.getElementById("imageInput").files[0];
       const title = document.getElementById("titleInput").value.trim();
       const desc = document.getElementById("descInput").value.trim();
@@ -95,24 +106,36 @@
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const imageBase64 = e.target.result;
-        const newMemory = { image: imageBase64, title, desc };
+      const storageRef = ref(storage, 'memories/' + Date.now() + '_' + file.name);
+      await uploadBytes(storageRef, file);
+      const imageUrl = await getDownloadURL(storageRef);
 
-        memoryData.push(newMemory);
-        localStorage.setItem("memories", JSON.stringify(memoryData));
-        displayMemories(); // Update the memory gallery
-        clearInputs();
-      };
-      reader.readAsDataURL(file);
+      await addDoc(collection(db, "memories"), {
+        title,
+        desc,
+        image: imageUrl,
+        timestamp: Date.now()
+      });
+
+      displayMemories();
+      document.getElementById("imageInput").value = "";
+      document.getElementById("titleInput").value = "";
+      document.getElementById("descInput").value = "";
     }
 
-    function displayMemories() {
+    async function displayMemories() {
       const gallery = document.querySelector(".memory-gallery");
       gallery.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "memories"));
+      const memories = [];
 
-      memoryData.forEach((mem) => {
+      querySnapshot.forEach((doc) => {
+        memories.push(doc.data());
+      });
+
+      memories.sort((a, b) => b.timestamp - a.timestamp);
+
+      memories.forEach((mem) => {
         const card = document.createElement("div");
         card.className = "memory-card";
 
@@ -132,12 +155,6 @@
 
         gallery.appendChild(card);
       });
-    }
-
-    function clearInputs() {
-      document.getElementById("imageInput").value = "";
-      document.getElementById("titleInput").value = "";
-      document.getElementById("descInput").value = "";
     }
   </script>
 </body>
