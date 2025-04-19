@@ -5,19 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Memories</title>
   <link rel="stylesheet" href="stylesmemories.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 </head>
 
-<main class="memories">
-  <h1>My Memories</h1>
-  <!-- Form and container go here -->
-</main>
-<link rel="stylesheet" href="memories.css">
-
 <body>
-  <nav class="navbar">
+  <nav>
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="relationship.html">Relationship</a>
@@ -30,21 +25,25 @@
     <a href="appreciation.html">Letter of Appreciation</a>
     <a href="gratitude.html">Gratitude Wall</a>
     <a href="chat.html">chatting box</a>
-    <span class="greeting">Welcome, <strong id="username">Harsh!</strong></span>
-    <button id="logoutBtn">Logout</button>
+    <span class="greeting">Welcome, <strong>Harsh!</strong></span>
+    <button class="logout-btn" id="logoutBtn">Logout</button>
   </nav>
 
-  <h1 class="page-title">Our Cherished Memories</h1>
+  <main class="memories">
+    <h1>Our Cherished Memories</h1>
 
-  <div class="memory-form">
-    <h2>Add a New Memory 🥰</h2>
-    <input type="file" id="imageFile" />
-    <input type="text" id="memoryTitle" placeholder="Title (e.g. 'Anniversary Night')" />
-    <input type="text" id="memoryDesc" placeholder="Short Description" />
-    <button onclick="addMemory()">Add Memory</button>
-  </div>
+    <div class="upload-container">
+      <h2>Add a New Memory 🥰</h2>
+      <div class="upload-form">
+        <input type="file" id="imageFile" />
+        <input type="text" id="memoryTitle" placeholder="Title (e.g. 'Anniversary Night')" />
+        <textarea id="memoryDesc" placeholder="Short Description"></textarea>
+        <button onclick="addMemory()">Add Memory</button>
+      </div>
+    </div>
 
-  <div class="memory-container" id="memoryContainer"></div>
+    <div class="memory-gallery" id="memoryContainer"></div>
+  </main>
 
   <script src="memories.js"></script>
 </body>

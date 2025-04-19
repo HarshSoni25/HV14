@@ -12,6 +12,7 @@
   h1, h2 {
     font-family: 'Great Vibes', cursive;
     color: #d6336c;
+    text-align: center;
   }
   
   a {
@@ -39,7 +40,6 @@
   
   nav a {
     color: white;
-    text-decoration: none;
     font-weight: 600;
     background-color: #ff69b4;
     padding: 10px 22px;
@@ -54,16 +54,14 @@
     transform: scale(1.08);
   }
   
-  nav .welcome-text {
+  nav .greeting {
     color: #000;
     font-weight: bold;
     font-size: 1rem;
-    margin-left: auto;
-    margin-right: 0.5rem;
     align-self: center;
   }
   
-  nav .logout-btn {
+  .logout-btn {
     background-color: #ff4d6d;
     color: #fff;
     font-weight: 600;
@@ -74,14 +72,8 @@
     cursor: pointer;
   }
   
-  nav .logout-btn:hover {
+  .logout-btn:hover {
     background-color: #ff6b81;
-  }
-  
-  /* Animation for Nav */
-  @keyframes slideDown {
-    0% { transform: translateY(-20px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
   }
   
   /* ============================
@@ -99,9 +91,7 @@
   }
   
   .upload-container h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.8rem;
-    color: #d6336c;
+    font-size: 2.4rem;
     margin-bottom: 1.5rem;
     text-shadow: 1px 1px #ffc9de;
   }
@@ -148,7 +138,57 @@
     transform: scale(1.05);
   }
   
-  /* Fade In Animation */
+  /* ============================
+     🖼️ MEMORY DISPLAY SECTION
+     ============================ */
+  .memory-gallery {
+    max-width: 1200px;
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 0 1.5rem 3rem;
+  }
+  
+  .memory-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(255, 105, 180, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    text-align: center;
+  }
+  
+  .memory-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .memory-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  
+  .memory-card h3 {
+    margin: 1rem 0 0.5rem;
+    color: #c9184a;
+    font-size: 1.3rem;
+  }
+  
+  .memory-card p {
+    padding: 0 1rem 1rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  /* ============================
+     🌟 ANIMATIONS
+     ============================ */
+  @keyframes slideDown {
+    0% { transform: translateY(-20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
   @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(30px); }
     100% { opacity: 1; transform: translateY(0); }
