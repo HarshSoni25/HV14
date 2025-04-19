@@ -28,8 +28,8 @@
     <h1>About Us 💑</h1>
     <div class="profile-cards">
       <div class="card">
-        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-me', 'profileImageHarsh')" />
-        <img id="preview-me" class="profile-pic" src="" alt="Your Photo" style="display: none;" />
+        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-me', 'image-harsh')" />
+        <img id="preview-me" class="profile-pic" src="" alt="Your Photo" />
         <h2>About Harsh</h2>
         <p><strong>Name:</strong> [Your Name]</p>
         <p><strong>Things I love:</strong> [e.g., Coffee, Long walks, Good music]</p>
@@ -39,8 +39,8 @@
       </div>
 
       <div class="card">
-        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-you', 'profileImageVini')" />
-        <img id="preview-you" class="profile-pic" src="" alt="Partner Photo" style="display: none;" />
+        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-you', 'image-vini')" />
+        <img id="preview-you" class="profile-pic" src="" alt="Partner Photo" />
         <h2>About Vini</h2>
         <p><strong>Name:</strong> [Partner's Name]</p>
         <p><strong>Things You Love:</strong> [e.g., Sunsets, Chocolates, Travel]</p>
@@ -65,21 +65,6 @@
     function logout() {
       sessionStorage.removeItem("loggedInUser");
       window.location.replace("login.html");
-    }
-
-    function previewImage(input, previewId, storageKey) {
-      const file = input.files[0];
-      const preview = document.getElementById(previewId);
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-          const base64 = e.target.result;
-          preview.src = base64;
-          preview.style.display = "block";
-          localStorage.setItem(storageKey, base64);
-        };
-        reader.readAsDataURL(file);
-      }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -110,21 +95,41 @@
         nav.appendChild(container);
       }
 
-      // Load saved profile pictures
-      const savedHarsh = localStorage.getItem("profileImageHarsh");
-      if (savedHarsh) {
-        const img = document.getElementById("preview-me");
-        img.src = savedHarsh;
-        img.style.display = "block";
+      // Load saved images on page load
+      const harshImage = localStorage.getItem('image-harsh');
+      const viniImage = localStorage.getItem('image-vini');
+
+      if (harshImage) {
+        const harshImg = document.getElementById('preview-me');
+        harshImg.src = harshImage;
+        harshImg.style.display = 'block';
       }
 
-      const savedVini = localStorage.getItem("profileImageVini");
-      if (savedVini) {
-        const img = document.getElementById("preview-you");
-        img.src = savedVini;
-        img.style.display = "block";
+      if (viniImage) {
+        const viniImg = document.getElementById('preview-you');
+        viniImg.src = viniImage;
+        viniImg.style.display = 'block';
       }
     });
+
+    function previewImage(input, previewId, storageKey) {
+      const file = input.files[0];
+      const preview = document.getElementById(previewId);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const base64String = e.target.result;
+          preview.src = base64String;
+          preview.style.display = "block";
+          try {
+            localStorage.setItem(storageKey, base64String);
+          } catch (err) {
+            alert("Unable to save image. Try clearing storage or using a smaller file.");
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   </script>
 </body>
 </html>
