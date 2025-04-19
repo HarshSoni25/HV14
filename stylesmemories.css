@@ -1,111 +1,66 @@
-/* stylesmemories.css */
-
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fefefe;
+  font-family: 'Arial', sans-serif;
+  background-color: #fdf6f6;
   margin: 0;
   padding: 0;
 }
 
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #2c3e50;
-  padding: 1rem;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: 16px;
-}
-
-.navbar a.active {
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.navbar .greeting {
-  margin-left: auto;
-  color: #ecf0f1;
-}
-
 .page-title {
   text-align: center;
-  margin: 2rem 0 1rem;
-  font-size: 2.5rem;
-  color: #34495e;
+  margin-top: 30px;
+  font-size: 2rem;
+  color: #333;
 }
 
 .memory-form {
+  width: 80%;
   max-width: 500px;
-  margin: 0 auto 2rem;
-  background-color: #ecf0f1;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.memory-form h2 {
-  text-align: center;
-  color: #2c3e50;
-}
-
-.memory-form input[type="file"],
 .memory-form input[type="text"],
+.memory-form input[type="file"],
 .memory-form button {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
   padding: 10px;
-  font-size: 16px;
-  border-radius: 6px;
+  font-size: 1rem;
+  border-radius: 8px;
   border: 1px solid #ccc;
 }
 
 .memory-form button {
-  background-color: #3498db;
+  background-color: #ff80ab;
   color: white;
   border: none;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .memory-form button:hover {
-  background-color: #2980b9;
+  background-color: #ff4081;
 }
 
 .memory-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
   gap: 20px;
+  justify-content: center;
+  padding: 20px;
 }
 
 .memory-card {
-  background-color: #fff;
-  width: 300px;
+  background: white;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  overflow: hidden;
+  box-shadow: 0px 0px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  max-width: 250px;
   text-align: center;
 }
 
 .memory-card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.memory-card h3 {
-  margin: 10px 0 5px;
-  color: #2c3e50;
-}
-
-.memory-card p {
-  color: #7f8c8d;
-  margin: 0 10px 15px;
+  max-width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
