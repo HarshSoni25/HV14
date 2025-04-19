@@ -1,73 +1,95 @@
 // memories.js
+console.log("Ready!");
 
-// Firebase already initialized via module or compat mode (ensure not duplicated)
+// Initialize Firebase (Compat SDK)
+const firebaseConfig = {
+  apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
+  authDomain: "hv14-b967f.firebaseapp.com",
+  projectId: "hv14-b967f",
+  storageBucket: "hv14-b967f.appspot.com",
+  messagingSenderId: "866538586375",
+  appId: "1:866538586375:web:6af88deeb3ee83536385a2"
+};
 
-const storage = firebase.storage();
+// Initialize Firebase app and services
+firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const memoriesRef = db.collection("memories");
 
-async function addMemory() {
-    const imageFile = document.getElementById("imageFile").files[0];
-    const title = document.getElementById("memoryTitle").value.trim();
-    const description = document.getElementById("memoryDesc").value.trim();
-  
-    if (!imageFile || !title || !description) {
-      alert("Please fill all fields and choose an image.");
-      return;
-    }
-  
-    try {
-      console.log("Uploading file...");
-      const storageRef = firebase.storage().ref(`memories/${Date.now()}_${imageFile.name}`);
-      await storageRef.put(imageFile);
-      console.log("File uploaded successfully.");
-  
-      const imageUrl = await storageRef.getDownloadURL();
-      console.log("Download URL:", imageUrl);
-  
-      console.log("Saving to Firestore...");
-      await firebase.firestore().collection("memories").add({
-        title,
-        description,
-        imageUrl,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
-      console.log("Memory added to Firestore.");
-  
-      // Clear form
-      document.getElementById("imageFile").value = "";
-      document.getElementById("memoryTitle").value = "";
-      document.getElementById("memoryDesc").value = "";
-      alert("Memory added!");
-    } catch (error) {
-      console.error("🔥 Error details:", error);
-      alert("Something went wrong: " + error.message);
-    }
-  }
-  
+// Convert file to base64
+function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
 
-// Display all memories
-memoriesRef.orderBy("createdAt", "desc").onSnapshot(snapshot => {
+// Add memory
+async function addMemory() {
+  const imageFile = document.getElementById("imageFile").files[0];
+  const title = document.getElementById("memoryTitle").value.trim();
+  const description = document.getElementById("memoryDesc").value.trim();
+
+  if (!imageFile || !title || !description) {
+    alert("Please fill all fields and select an image.");
+    return;
+  }
+
+  try {
+    const base64Image = await toBase64(imageFile);
+    console.log("Base64 image length:", base64Image.length);
+
+    await memoriesRef.add({
+      title,
+      description,
+      imageBase64: base64Image,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    document.getElementById("imageFile").value = "";
+    document.getElementById("memoryTitle").value = "";
+    document.getElementById("memoryDesc").value = "";
+
+    alert("Memory added successfully!");
+  } catch (error) {
+    console.error("Error adding memory:", error);
+    alert("Something went wrong while saving the memory.");
+  }
+}
+
+// Load memories
+function loadMemories() {
   const container = document.getElementById("memoryContainer");
   container.innerHTML = "";
 
-  snapshot.forEach(doc => {
-    const data = doc.data();
-    const card = document.createElement("div");
-    card.classList.add("memory-card");
+  memoriesRef.orderBy("createdAt", "desc").onSnapshot(snapshot => {
+    container.innerHTML = ""; // Clear before re-render
 
-    const img = document.createElement("img");
-    img.src = data.imageUrl;
+    snapshot.forEach(doc => {
+      const { title, description, imageBase64 } = doc.data();
 
-    const title = document.createElement("h3");
-    title.textContent = data.title;
+      const card = document.createElement("div");
+      card.classList.add("memory-card");
 
-    const desc = document.createElement("p");
-    desc.textContent = data.description;
+      const img = document.createElement("img");
+      img.src = imageBase64;
+      img.alt = title;
 
-    card.appendChild(img);
-    card.appendChild(title);
-    card.appendChild(desc);
-    container.appendChild(card);
+      const t = document.createElement("h3");
+      t.textContent = title;
+
+      const d = document.createElement("p");
+      d.textContent = description;
+
+      card.appendChild(img);
+      card.appendChild(t);
+      card.appendChild(d);
+      container.appendChild(card);
+    });
   });
-});
+}
+
+// Run it
+loadMemories();
