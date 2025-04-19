@@ -1,4 +1,3 @@
-// memories.js
 console.log("Ready!");
 
 // Initialize Firebase (Compat SDK)
@@ -11,12 +10,10 @@ const firebaseConfig = {
   appId: "1:866538586375:web:6af88deeb3ee83536385a2"
 };
 
-// Initialize Firebase app and services
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const memoriesRef = db.collection("memories");
 
-// Convert file to base64
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -26,7 +23,6 @@ function toBase64(file) {
   });
 }
 
-// Add memory
 async function addMemory() {
   const imageFile = document.getElementById("imageFile").files[0];
   const title = document.getElementById("memoryTitle").value.trim();
@@ -59,16 +55,29 @@ async function addMemory() {
   }
 }
 
-// Load memories
+function deleteMemory(docId) {
+  if (confirm("Are you sure you want to delete this memory?")) {
+    memoriesRef.doc(docId).delete()
+      .then(() => {
+        console.log("Memory deleted:", docId);
+      })
+      .catch((error) => {
+        console.error("Error deleting memory:", error);
+        alert("Failed to delete memory.");
+      });
+  }
+}
+
 function loadMemories() {
   const container = document.getElementById("memoryContainer");
   container.innerHTML = "";
 
   memoriesRef.orderBy("createdAt", "desc").onSnapshot(snapshot => {
-    container.innerHTML = ""; // Clear before re-render
+    container.innerHTML = "";
 
     snapshot.forEach(doc => {
       const { title, description, imageBase64 } = doc.data();
+      const docId = doc.id;
 
       const card = document.createElement("div");
       card.classList.add("memory-card");
@@ -83,13 +92,18 @@ function loadMemories() {
       const d = document.createElement("p");
       d.textContent = description;
 
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.className = "delete-btn";
+      delBtn.onclick = () => deleteMemory(docId);
+
       card.appendChild(img);
       card.appendChild(t);
       card.appendChild(d);
+      card.appendChild(delBtn);
       container.appendChild(card);
     });
   });
 }
 
-// Run it
 loadMemories();
