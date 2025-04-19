@@ -11,7 +11,7 @@ document.getElementById("login-form").addEventListener("submit", function (e) {
     };
   
     if (validUsers[username] === password) {
-      localStorage.setItem("loggedInUser", username);
+      sessionStorage.setItem("loggedInUser", username);
       window.location.href = "index.html";
     } else {
       errorMsg.textContent = "Invalid username or password!";

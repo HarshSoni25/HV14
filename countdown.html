@@ -78,16 +78,15 @@
   </script>
 
 <script>
-  const user = localStorage.getItem("loggedInUser");
+   const user = sessionStorage.getItem("loggedInUser");
   if (!user) {
     window.location.href = "login.html";
   }
 
   function logout() {
-    localStorage.removeItem("loggedInUser");
+    sessionStorage.removeItem("loggedInUser");
     window.location.replace("login.html");
   }
-
   document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector("nav");
 
