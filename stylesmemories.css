@@ -100,3 +100,60 @@
     100% { transform: translateY(0); opacity: 1; }
   }
   
+  .add-memory {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .add-memory input[type="text"], .add-memory input[type="file"] {
+    margin: 10px 5px;
+    padding: 10px;
+    width: 80%;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .add-memory button {
+    background-color: #ff7eb3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+  }
+  
+  .add-memory button:hover {
+    background-color: #ff5f9e;
+  }
+  
+  .memory-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+  }
+  
+  .memory-card {
+    background: #ffe6f0;
+    border-radius: 20px;
+    padding: 15px;
+    max-width: 300px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  
+  .memory-card img {
+    max-width: 100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+  }
+  

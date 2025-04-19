@@ -25,51 +25,48 @@
 
   <main class="memories">
     <h1>Our Cherished Memories</h1>
+
+    <!-- Add Memory Section -->
+    <section class="add-memory">
+      <h2>Add a New Memory 🥰</h2>
+      <input type="file" id="imageInput" accept="image/*">
+      <input type="text" id="titleInput" placeholder="Title (e.g. 'Anniversary Night')">
+      <input type="text" id="descInput" placeholder="Short Description">
+      <button onclick="addMemory()">Add Memory</button>
+    </section>
+
+    <!-- Memory Gallery -->
     <section class="memory-gallery">
-      <div class="memory-card">
-        <img src="IMG_4709.jpeg" alt="Beach Walk">
-        <h2>Sunset Walk</h2>
-        <p>That golden evening where everything felt perfect.</p>
-      </div>
-      <div class="memory-card">
-        <img src="images/memory2.jpg" alt="Birthday Celebration">
-        <h2>Birthday Bash</h2>
-        <p>Your smile that day is still my favorite picture.</p>
-      </div>
-      <div class="memory-card">
-        <img src="images/memory3.jpg" alt="Trip">
-        <h2>Our First Trip</h2>
-        <p>Mountains, laughter, and forever vibes.</p>
-      </div>
+      <!-- Memory cards will be inserted here dynamically -->
     </section>
   </main>
 
   <script>
     const user = sessionStorage.getItem("loggedInUser");
-  if (!user) {
-    window.location.href = "login.html";
-  }
+    if (!user) {
+      window.location.href = "login.html";
+    }
 
-  function logout() {
-    sessionStorage.removeItem("loggedInUser");
-    window.location.replace("login.html");
-  }
-  
+    function logout() {
+      sessionStorage.removeItem("loggedInUser");
+      window.location.replace("login.html");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const nav = document.querySelector("nav");
-  
+
       if (nav && user) {
         const container = document.createElement("div");
-        container.style.marginRight = "20px"; // Slightly left from the edge
+        container.style.marginRight = "20px";
         container.style.display = "flex";
         container.style.alignItems = "center";
         container.style.gap = "15px";
-  
+
         const welcomeText = document.createElement("span");
         welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
         welcomeText.style.color = "black";
         welcomeText.style.fontWeight = "bold";
-  
+
         const logoutBtn = document.createElement("a");
         logoutBtn.href = "#";
         logoutBtn.textContent = "Logout";
@@ -77,13 +74,71 @@
         logoutBtn.style.textDecoration = "none";
         logoutBtn.style.fontWeight = "bold";
         logoutBtn.addEventListener("click", logout);
-  
+
         container.appendChild(welcomeText);
         container.appendChild(logoutBtn);
         nav.appendChild(container);
       }
+
+      displayMemories();
     });
+
+    let memoryData = JSON.parse(localStorage.getItem("memories")) || [];
+
+    function addMemory() {
+      const file = document.getElementById("imageInput").files[0];
+      const title = document.getElementById("titleInput").value.trim();
+      const desc = document.getElementById("descInput").value.trim();
+
+      if (!file || !title || !desc) {
+        alert("Please fill in all fields and select an image.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const imageBase64 = e.target.result;
+        const newMemory = { image: imageBase64, title, desc };
+
+        memoryData.push(newMemory);
+        localStorage.setItem("memories", JSON.stringify(memoryData));
+        displayMemories(); // Update the memory gallery
+        clearInputs();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function displayMemories() {
+      const gallery = document.querySelector(".memory-gallery");
+      gallery.innerHTML = "";
+
+      memoryData.forEach((mem) => {
+        const card = document.createElement("div");
+        card.className = "memory-card";
+
+        const img = document.createElement("img");
+        img.src = mem.image;
+        img.alt = mem.title;
+
+        const h2 = document.createElement("h2");
+        h2.textContent = mem.title;
+
+        const p = document.createElement("p");
+        p.textContent = mem.desc;
+
+        card.appendChild(img);
+        card.appendChild(h2);
+        card.appendChild(p);
+
+        gallery.appendChild(card);
+      });
+    }
+
+    function clearInputs() {
+      document.getElementById("imageInput").value = "";
+      document.getElementById("titleInput").value = "";
+      document.getElementById("descInput").value = "";
+    }
   </script>
-  
 </body>
 </html>
