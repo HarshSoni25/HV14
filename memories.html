@@ -41,20 +41,32 @@
     </section>
   </main>
 
-  <script>
+  <!-- Firebase Scripts -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
+      authDomain: "hv14-b967f.firebaseapp.com",
+      projectId: "hv14-b967f",
+      storageBucket: "hv14-b967f.firebasestorage.app",
+      messagingSenderId: "866538586375",
+      appId: "1:866538586375:web:6af88deeb3ee83536385a2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
+
     const user = sessionStorage.getItem("loggedInUser");
     if (!user) {
       window.location.href = "login.html";
     }
 
-    function logout() {
-      sessionStorage.removeItem("loggedInUser");
-      window.location.replace("login.html");
-    }
-
     document.addEventListener("DOMContentLoaded", () => {
       const nav = document.querySelector("nav");
-
       if (nav && user) {
         const container = document.createElement("div");
         container.style.marginRight = "20px";
@@ -73,7 +85,10 @@
         logoutBtn.style.color = "white";
         logoutBtn.style.textDecoration = "none";
         logoutBtn.style.fontWeight = "bold";
-        logoutBtn.addEventListener("click", logout);
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("loggedInUser");
+          window.location.replace("login.html");
+        });
 
         container.appendChild(welcomeText);
         container.appendChild(logoutBtn);
@@ -83,9 +98,7 @@
       displayMemories();
     });
 
-    let memoryData = JSON.parse(localStorage.getItem("memories")) || [];
-
-    function addMemory() {
+    async function addMemory() {
       const file = document.getElementById("imageInput").files[0];
       const title = document.getElementById("titleInput").value.trim();
       const desc = document.getElementById("descInput").value.trim();
@@ -95,24 +108,36 @@
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        const imageBase64 = e.target.result;
-        const newMemory = { image: imageBase64, title, desc };
+      const storageRef = ref(storage, 'memories/' + Date.now() + '_' + file.name);
+      await uploadBytes(storageRef, file);
+      const imageUrl = await getDownloadURL(storageRef);
 
-        memoryData.push(newMemory);
-        localStorage.setItem("memories", JSON.stringify(memoryData));
-        displayMemories(); // Update the memory gallery
-        clearInputs();
-      };
-      reader.readAsDataURL(file);
+      await addDoc(collection(db, "memories"), {
+        title,
+        desc,
+        image: imageUrl,
+        timestamp: Date.now()
+      });
+
+      displayMemories();
+      document.getElementById("imageInput").value = "";
+      document.getElementById("titleInput").value = "";
+      document.getElementById("descInput").value = "";
     }
 
-    function displayMemories() {
+    async function displayMemories() {
       const gallery = document.querySelector(".memory-gallery");
       gallery.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "memories"));
+      const memories = [];
 
-      memoryData.forEach((mem) => {
+      querySnapshot.forEach((doc) => {
+        memories.push(doc.data());
+      });
+
+      memories.sort((a, b) => b.timestamp - a.timestamp);
+
+      memories.forEach((mem) => {
         const card = document.createElement("div");
         card.className = "memory-card";
 
@@ -132,12 +157,6 @@
 
         gallery.appendChild(card);
       });
-    }
-
-    function clearInputs() {
-      document.getElementById("imageInput").value = "";
-      document.getElementById("titleInput").value = "";
-      document.getElementById("descInput").value = "";
     }
   </script>
 </body>
