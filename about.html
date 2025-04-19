@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Us</title>
-  <link rel="stylesheet" href="stylesabout.css?v=2">
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stylesabout.css?v=3" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
   <nav>
@@ -29,6 +29,8 @@
     <h1>About Us 💑</h1>
     <div class="profile-cards">
       <div class="card">
+        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-me')" />
+        <img id="preview-me" class="profile-pic" src="" alt="Your Photo" style="display: none;" />
         <h2>About Me</h2>
         <p><strong>Name:</strong> [Your Name]</p>
         <p><strong>Things I love:</strong> [e.g., Coffee, Long walks, Good music]</p>
@@ -38,6 +40,8 @@
       </div>
 
       <div class="card">
+        <input type="file" accept="image/*" class="profile-pic-input" onchange="previewImage(this, 'preview-you')" />
+        <img id="preview-you" class="profile-pic" src="" alt="Partner Photo" style="display: none;" />
         <h2>About You</h2>
         <p><strong>Name:</strong> [Partner's Name]</p>
         <p><strong>Things You Love:</strong> [e.g., Sunsets, Chocolates, Travel]</p>
@@ -52,32 +56,33 @@
       <p>We met on [Insert Day] and the moment we started talking, it felt like the world made sense. Over time, we’ve built something truly beautiful—filled with laughter, honesty, cuddles, tough talks, and a whole lot of love. This is our little digital home to celebrate us. ❤️</p>
     </section>
   </main>
-  <script>
-     const user = sessionStorage.getItem("loggedInUser");
-  if (!user) {
-    window.location.href = "login.html";
-  }
 
-  function logout() {
-    sessionStorage.removeItem("loggedInUser");
-    window.location.replace("login.html");
-  }
-  
+  <script>
+    const user = sessionStorage.getItem("loggedInUser");
+    if (!user) {
+      window.location.href = "login.html";
+    }
+
+    function logout() {
+      sessionStorage.removeItem("loggedInUser");
+      window.location.replace("login.html");
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
       const nav = document.querySelector("nav");
-  
+
       if (nav && user) {
         const container = document.createElement("div");
-        container.style.marginRight = "20px"; // Slightly left from the edge
+        container.style.marginRight = "20px";
         container.style.display = "flex";
         container.style.alignItems = "center";
         container.style.gap = "15px";
-  
+
         const welcomeText = document.createElement("span");
         welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
         welcomeText.style.color = "black";
         welcomeText.style.fontWeight = "bold";
-  
+
         const logoutBtn = document.createElement("a");
         logoutBtn.href = "#";
         logoutBtn.textContent = "Logout";
@@ -85,13 +90,25 @@
         logoutBtn.style.textDecoration = "none";
         logoutBtn.style.fontWeight = "bold";
         logoutBtn.addEventListener("click", logout);
-  
+
         container.appendChild(welcomeText);
         container.appendChild(logoutBtn);
         nav.appendChild(container);
       }
     });
+
+    function previewImage(input, previewId) {
+      const file = input.files[0];
+      const preview = document.getElementById(previewId);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.style.display = "block";
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   </script>
-  
 </body>
 </html>
