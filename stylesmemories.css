@@ -1,235 +1,138 @@
-/* =========================
-   🌐 GLOBAL STYLES
-   ========================= */
-   body {
-    margin: 0;
-    font-family: 'Times New Roman', Times, serif;
-    background: linear-gradient(to right, #fff0f6, #ffe0ec);
-    color: rgb(83, 18, 68);
-    text-align: center;
-    min-height: 100vh;
-    padding-top: 100px;
-  }
-  
-  /* =========================
-     🌈 NAVIGATION BAR
-     ========================= */
-  nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to right, #ffafcc, #ffc8dd);
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
-    border-radius: 0 0 20px 20px;
-    animation: slideDown 1s ease-out;
-    z-index: 999;
-  }
-  
-  nav .nav-links {
-    display: flex;
-    gap: 1.2rem;
-  }
-  
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    font-size: 1rem;
-    transition: background 0.3s ease, transform 0.2s ease;
-    border-radius: 20px;
-  }
-  
-  nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-  }
-  
-  #logout-btn {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  @keyframes slideDown {
-    0% { transform: translateY(-20px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-  
-  /* =========================
-     🧠 MEMORIES PAGE STYLES
-     ========================= */
-  main.memories {
-    padding: 2rem;
-  }
-  
-  main.memories h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3rem;
-    margin-bottom: 30px;
-  }
-  
-  /* Upload form with horizontal layout */
-  form#memoryForm {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    background-color: rgba(255, 255, 255, 0.4);
-    padding: 20px 30px;
-    margin: 0 auto 40px auto;
-    border-radius: 20px;
-    width: fit-content;
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
-    backdrop-filter: blur(10px);
-  }
-  
-  form#memoryForm input[type="file"],
-  form#memoryForm input[type="text"],
-  form#memoryForm textarea {
-    border: 1px solid #ffb6c1;
-    border-radius: 10px;
-    font-size: 1rem;
-    background: white;
-    color: #531244;
-    padding: 10px;
-  }
-  
-  form#memoryForm input[type="file"] {
-    width: 170px;
-  }
-  
-  form#memoryForm input[type="text"] {
-    width: 150px;
-  }
-  
-  form#memoryForm textarea {
-    width: 200px;
-    height: 60px;
-    resize: none;
-  }
-  
-  form#memoryForm button {
-    background-color: #ff69b4;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  form#memoryForm button:hover {
-    background-color: #ff4e89;
-  }
-  
-  /* =========================
-     🖼️ MEMORY CARDS
-     ========================= */
-  #memoryContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 2rem 3rem 2rem;
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  .memory-card {
-    background-color: white;
-    border-radius: 20px;
-    box-shadow: 0 6px 12px rgba(255, 105, 180, 0.15);
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 280px;
-    text-align: center;
-  }
-  
-  .memory-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(255, 105, 180, 0.25);
-  }
-  
-  .memory-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 20px 20px 0 0;
-  }
-  
-  .memory-content {
-    padding: 1rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .memory-content h3 {
-    margin: 0;
-    font-size: 1.3rem;
-    color: #d63384;
-  }
-  
-  .memory-content p {
-    font-size: 1rem;
-    color: #531244;
-    margin-top: 8px;
-    margin-bottom: 16px;
-  }
-  
-  /* Delete button */
-  .delete-btn {
-    background-color: #ff4d6d;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .delete-btn:hover {
-    background-color: #c9184a;
-  }
-  
-  /* =========================
-     📱 RESPONSIVE DESIGN
-     ========================= */
-  @media (max-width: 768px) {
-    form#memoryForm {
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    form#memoryForm input[type="file"],
-    form#memoryForm input[type="text"],
-    form#memoryForm textarea {
-      width: 100%;
-    }
-  
-    nav {
-      flex-direction: column;
-      align-items: flex-end;
-    }
-  }
-  
+/* ========== IMPORT FONTS ========== */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+/* ========== RESET & BODY ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #ffe0ec, #ffd6e8);
+  color: #531244;
+  text-align: center;
+}
+
+/* ========== NAVIGATION BAR ========== */
+nav {
+  background: linear-gradient(to right, #ffafcc, #ffc8dd);
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 10px rgba(255, 105, 180, 0.25);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  background-color: #f783ac;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background-color: #e85d9e;
+  transform: scale(1.05);
+}
+
+nav .welcome-text {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #531244;
+}
+
+nav .logout-btn {
+  background-color: #ff69b4;
+  color: white;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+nav .logout-btn:hover {
+  background-color: #d63384;
+}
+
+/* ========== HEADER TITLE ========== */
+main h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3rem;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  color: #c9184a;
+}
+
+/* ========== FORM CONTAINER ========== */
+.memory-form-container {
+  background-color: white;
+  padding: 40px 30px;
+  margin: 30px auto;
+  width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+}
+
+.memory-form-container h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+/* ========== FORM STYLES ========== */
+#memoryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#memoryForm input[type="file"],
+#memoryForm input[type="text"],
+#memoryForm textarea {
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#memoryForm input[type="text"]::placeholder,
+#memoryForm textarea::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+#memoryForm textarea {
+  resize: none;
+  height: 60px;
+}
+
+/* ========== SUBMIT BUTTON ========== */
+#memoryForm button {
+  background-color: #ff69b4;
+  color: white;
+  font-weight: bold;
+  border: none;
+  padding: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#memoryForm button:hover {
+  background-color: #e0559d;
+}
