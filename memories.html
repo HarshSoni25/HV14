@@ -20,24 +20,23 @@
             <a href="playlist.html">Playlist</a>
             <a href="letter.html">Letter of Appreciation</a>
             <a href="gratitude.html">Gratitude Wall</a>
-            <a href="chat.html">Chatting Box</a>
+            <a href="chat.html">chatting box</a>
         </div>
-        <div class="navbar-right" id="userInfo">
-            <!-- Username and Logout will appear here -->
-        </div>
+        <div class="navbar-right" id="userInfo"></div>
     </nav>
 
     <div class="container">
-        <h1>Upload Your Memories</h1>
-        <input type="file" id="imageInput" accept="image/*">
-        <input type="text" id="titleInput" placeholder="Enter memory title">
-        <input type="text" id="descInput" placeholder="Enter memory description">
-        <button onclick="uploadMemory()">Upload</button>
-
+        <h1>Our Cherished Memories</h1>
+        <div class="upload-box">
+            <h2>Add a New Memory 🥰</h2>
+            <input type="file" id="imageInput" accept="image/*">
+            <input type="text" id="titleInput" placeholder="Title (e.g. 'Anniversary Night')">
+            <input type="text" id="descInput" placeholder="Short Description">
+            <button onclick="uploadMemory()">Add Memory</button>
+        </div>
         <div id="memoryList"></div>
     </div>
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
@@ -97,7 +96,7 @@
 
                 memoryDiv.innerHTML = `
                     <img src="${memory.imageUrl}" alt="${memory.title}" width="300">
-                    <h2>${memory.title}</h2>
+                    <h3>${memory.title}</h3>
                     <p>${memory.description}</p>
                 `;
                 memoryList.appendChild(memoryDiv);
@@ -111,12 +110,13 @@
             const userInfoDiv = document.getElementById("userInfo");
             const welcomeText = document.createElement("span");
             welcomeText.textContent = "Welcome, " + user + "!";
-            welcomeText.style.color = "white";
+            welcomeText.style.fontWeight = "bold";
+            welcomeText.style.color = "#000";
             welcomeText.style.marginRight = "10px";
 
             const logoutBtn = document.createElement("button");
             logoutBtn.textContent = "Logout";
-            logoutBtn.style.marginLeft = "10px";
+            logoutBtn.className = "logout-btn";
             logoutBtn.onclick = () => {
                 sessionStorage.removeItem("loggedInUser");
                 window.location.href = "login.html";
