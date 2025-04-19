@@ -26,33 +26,39 @@
   /* ============================
      🌸 NAVIGATION BAR
      ============================ */
-  nav {
-    background: linear-gradient(to right, #ffafcc, #ffc8dd);
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-    box-shadow: 0 4px 10px rgba(255, 192, 203, 0.4);
-    border-radius: 0 0 25px 25px;
-    animation: slideDown 1s ease-out;
-  }
-  
-  nav a {
-    color: white;
-    font-weight: 600;
-    background-color: #ff69b4;
-    padding: 10px 22px;
-    border-radius: 30px;
-    transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.4);
-    font-size: 1.05rem;
-  }
-  
-  nav a:hover {
-    background-color: #ff85c1;
-    transform: scale(1.08);
-  }
+     nav {
+      background: linear-gradient(to right, #ffafcc, #ffc8dd);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
+      border-radius: 0 0 20px 20px;
+      animation: slideDown 1s ease-out;
+    }
+    
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      background-color: #ff69b4;
+      padding: 10px 18px;
+      border-radius: 30px;
+      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 2px 6px rgba(255, 105, 180, 0.4);
+      font-size: 1rem;
+    }
+    
+    nav a:hover {
+      background-color: #ff85c1;
+      transform: scale(1.05);
+    }
+    
+    @keyframes slideDown {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }  
   
   nav .greeting {
     color: #000;
