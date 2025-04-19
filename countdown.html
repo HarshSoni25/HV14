@@ -29,7 +29,7 @@
 
     <section class="timer-boxes">
       <div class="timer-card">
-        <h2>Anniversary ❤️</h2>
+        <h2> 8 months Anniversary ❤️</h2>
         <p id="anniversary"></p>
       </div>
 
@@ -39,7 +39,7 @@
       </div>
 
       <div class="timer-card">
-        <h2>Days Since We Met 🌸</h2>
+        <h2>Days Since We are together 🌸</h2>
         <p id="sinceMet"></p>
       </div>
     </section>
@@ -64,9 +64,9 @@
       countEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    const anniversaryDate = new Date("2025-06-01T00:00:00");
-    const tripDate = new Date("2025-08-15T00:00:00");
-    const metDate = new Date("2023-12-15T00:00:00");
+    const anniversaryDate = new Date("2025-05-14T00:00:00");
+    const tripDate = new Date("2025-08-25T00:00:00");
+    const metDate = new Date("2024-09-14T00:00:00");
 
     setInterval(() => {
       countdown("anniversary", anniversaryDate);
@@ -87,6 +87,7 @@
     sessionStorage.removeItem("loggedInUser");
     window.location.replace("login.html");
   }
+
   document.addEventListener("DOMContentLoaded", () => {
     const nav = document.querySelector("nav");
 
