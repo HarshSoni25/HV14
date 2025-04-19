@@ -28,7 +28,7 @@
     <p class="intro">Write down what you're thankful for and see it bloom here 💖</p>
 
     <form id="gratitude-form">
-      <input type="text" id="name-input" placeholder="Your Name..." required readonly />
+      <input type="hidden" id="name-input" required />
       <input type="text" id="gratitude-input" placeholder="I'm grateful for..." required />
       <button type="submit">Add</button>
     </form>
@@ -50,21 +50,20 @@
     }
 
     document.addEventListener("DOMContentLoaded", () => {
-      // Fill in name input
+      // Auto-fill hidden name input
       const nameInput = document.getElementById("name-input");
-      if (nameInput && user) {
-        nameInput.value = user.charAt(0).toUpperCase() + user.slice(1); // Capitalize
+      if (nameInput) {
+        nameInput.value = user;
       }
 
-      // Create welcome + logout
+      // Add welcome + logout link without affecting nav styling
       const nav = document.querySelector("nav");
       if (nav && user) {
         const container = document.createElement("div");
-        container.style.marginLeft = "auto";
+        container.style.marginRight = "20px";
         container.style.display = "flex";
         container.style.alignItems = "center";
         container.style.gap = "15px";
-        container.style.marginRight = "20px";
 
         const welcomeText = document.createElement("span");
         welcomeText.textContent = `Welcome, ${user.charAt(0).toUpperCase() + user.slice(1)}!`;
