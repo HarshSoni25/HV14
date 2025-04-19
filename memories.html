@@ -1,132 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Memories</title>
-    <link rel="stylesheet" href="stylesmemories.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memories</title>
+  <link rel="stylesheet" href="stylesmemories.css"/>
 </head>
 <body>
-    <nav>
-        <div class="navbar-left">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="relationship.html">Relationship</a>
-            <a href="memories.html" class="active">Memories</a>
-            <a href="agreement.html">Agreement</a>
-            <a href="bucketlist.html">Bucket List</a>
-            <a href="goals.html">Dreams & Goals</a>
-            <a href="countdown.html">Countdowns</a>
-            <a href="playlist.html">Playlist</a>
-            <a href="letter.html">Letter of Appreciation</a>
-            <a href="gratitude.html">Gratitude Wall</a>
-            <a href="chat.html">chatting box</a>
-        </div>
-        <div class="navbar-right" id="userInfo"></div>
-    </nav>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="relationship.html">Relationship</a>
+    <a href="memories.html" class="active">Memories</a>
+    <a href="agreement.html">Agreement</a>
+    <a href="bucketlist.html">Bucket List</a>
+    <a href="dreamsgoals.html">Dreams & Goals</a>
+    <a href="countdowns.html">Countdowns</a>
+    <a href="playlist.html">Playlist</a>
+    <a href="appreciation.html">Letter of Appreciation</a>
+    <a href="gratitude.html">Gratitude Wall</a>
+    <a href="chat.html">chatting box</a>
+    <span id="welcomeUser"></span>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+  </div>
 
-    <div class="container">
-        <h1>Our Cherished Memories</h1>
-        <div class="upload-box">
-            <h2>Add a New Memory 🥰</h2>
-            <input type="file" id="imageInput" accept="image/*">
-            <input type="text" id="titleInput" placeholder="Title (e.g. 'Anniversary Night')">
-            <input type="text" id="descInput" placeholder="Short Description">
-            <button onclick="uploadMemory()">Add Memory</button>
-        </div>
-        <div id="memoryList"></div>
-    </div>
+  <h1 class="page-title">Our Cherished Memories</h1>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-storage.js";
-        import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+  <div class="memory-form-container">
+    <h2>Add a New Memory 🥰</h2>
+    <form id="memoryForm">
+      <input type="file" id="memoryImage" accept="image/*" required/>
+      <input type="text" id="memoryTitle" placeholder="Title" required/>
+      <input type="text" id="memoryCaption" placeholder="Caption" required/>
+      <button type="submit">Add Memory</button>
+    </form>
+  </div>
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
-            authDomain: "hv14-b967f.firebaseapp.com",
-            projectId: "hv14-b967f",
-            storageBucket: "hv14-b967f.appspot.com",
-            messagingSenderId: "866538586375",
-            appId: "1:866538586375:web:6af88deeb3ee83536385a2"
-        };
+  <div id="memoryGallery" class="gallery"></div>
 
-        const app = initializeApp(firebaseConfig);
-        const storage = getStorage(app);
-        const db = getFirestore(app);
-
-        async function uploadMemory() {
-            const imageInput = document.getElementById("imageInput");
-            const titleInput = document.getElementById("titleInput");
-            const descInput = document.getElementById("descInput");
-
-            if (!imageInput.files.length || !titleInput.value || !descInput.value) {
-                alert("Please fill in all fields and select an image.");
-                return;
-            }
-
-            const file = imageInput.files[0];
-            const storageRef = ref(storage, 'memories/' + file.name);
-            await uploadBytes(storageRef, file);
-            const imageUrl = await getDownloadURL(storageRef);
-
-            await addDoc(collection(db, "memories"), {
-                title: titleInput.value,
-                description: descInput.value,
-                imageUrl: imageUrl,
-                timestamp: Date.now()
-            });
-
-            titleInput.value = "";
-            descInput.value = "";
-            imageInput.value = "";
-
-            displayMemories();
-        }
-
-        async function displayMemories() {
-            const memoryList = document.getElementById("memoryList");
-            memoryList.innerHTML = "";
-
-            const querySnapshot = await getDocs(collection(db, "memories"));
-            querySnapshot.forEach((doc) => {
-                const memory = doc.data();
-                const memoryDiv = document.createElement("div");
-                memoryDiv.className = "memory";
-
-                memoryDiv.innerHTML = `
-                    <img src="${memory.imageUrl}" alt="${memory.title}" width="300">
-                    <h3>${memory.title}</h3>
-                    <p>${memory.description}</p>
-                `;
-                memoryList.appendChild(memoryDiv);
-            });
-        }
-
-        const user = sessionStorage.getItem("loggedInUser");
-        if (!user) {
-            window.location.href = "login.html";
-        } else {
-            const userInfoDiv = document.getElementById("userInfo");
-            const welcomeText = document.createElement("span");
-            welcomeText.textContent = "Welcome, " + user + "!";
-            welcomeText.style.fontWeight = "bold";
-            welcomeText.style.color = "#000";
-            welcomeText.style.marginRight = "10px";
-
-            const logoutBtn = document.createElement("button");
-            logoutBtn.textContent = "Logout";
-            logoutBtn.className = "logout-btn";
-            logoutBtn.onclick = () => {
-                sessionStorage.removeItem("loggedInUser");
-                window.location.href = "login.html";
-            };
-
-            userInfoDiv.appendChild(welcomeText);
-            userInfoDiv.appendChild(logoutBtn);
-        }
-
-        displayMemories();
-    </script>
+  <script src="memories.js"></script>
 </body>
 </html>

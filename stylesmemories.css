@@ -1,111 +1,121 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom right, #ffe5ec, #ffc2d1);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(to bottom, #ffd1dc, #ffe6f0);
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: pink;
-  padding: 10px 20px;
-  border-bottom: 2px solid #fff;
-  flex-wrap: wrap;
-  border-radius: 0 0 20px 20px;
+.navbar {
+  background-color: #ffb6c1;
+  overflow: auto;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 2px solid white;
 }
 
-.navbar-left a {
-  text-decoration: none;
-  color: white;
-  background-color: #ff69b4;
+.navbar a {
   padding: 10px 15px;
   margin: 5px;
+  background-color: #ff69b4;
   border-radius: 20px;
+  color: white;
+  text-decoration: none;
   font-weight: bold;
-  transition: background-color 0.3s ease;
 }
 
-.navbar-left a:hover,
-.navbar-left a.active {
-  background-color: #ff1493;
-}
-
-.navbar-right {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 5px;
+.navbar .active {
+  background-color: hotpink;
 }
 
 .logout-btn {
-  padding: 6px 12px;
-  border-radius: 15px;
   background-color: #ff69b4;
   color: white;
   border: none;
+  padding: 8px 12px;
+  border-radius: 15px;
   cursor: pointer;
+  margin-left: 10px;
+}
+
+#welcomeUser {
   font-weight: bold;
+  margin-left: 15px;
+  color: black;
 }
 
-.logout-btn:hover {
-  background-color: #ff1493;
+.page-title {
+  text-align: center;
+  color: deeppink;
+  font-size: 2.5rem;
+  margin-top: 30px;
 }
 
-.container {
-  max-width: 800px;
+.memory-form-container {
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
   margin: 30px auto;
-  padding: 20px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-.container h1 {
-  font-size: 2.5em;
-  color: #d63384;
-  margin-bottom: 30px;
-  font-family: 'Brush Script MT', cursive;
+.memory-form-container h2 {
+  margin-bottom: 20px;
+  color: #ff1493;
 }
 
-.upload-box {
-  background-color: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-bottom: 40px;
-}
-
-.upload-box input, .upload-box button {
-  width: 90%;
+#memoryForm input,
+#memoryForm button {
+  display: block;
+  width: 100%;
   margin: 10px 0;
-  padding: 10px;
+  padding: 12px;
+  border: 1px solid #ff69b4;
   border-radius: 10px;
-  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
-.upload-box button {
+#memoryForm button {
   background-color: #ff69b4;
   color: white;
-  font-weight: bold;
   border: none;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
-.upload-box button:hover {
-  background-color: #ff1493;
+#memoryForm button:hover {
+  background-color: hotpink;
 }
 
-.memory {
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.memory-card {
   background-color: white;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 20px auto;
-  max-width: 600px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 15px;
+  margin: 15px;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
-.memory img {
+.memory-card img {
   max-width: 100%;
   border-radius: 10px;
-  margin-bottom: 10px;
+}
+
+.memory-card h3 {
+  margin: 10px 0 5px;
+  color: #ff1493;
+}
+
+.memory-card p {
+  color: #555;
 }
