@@ -12,7 +12,7 @@
   }
   
   /* =========================
-     🌈 NAVIGATION BAR (Same as Index)
+     🌈 NAVIGATION BAR
      ========================= */
   #logout-btn {
     color: white;
@@ -41,6 +41,7 @@
     box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
     border-radius: 0 0 20px 20px;
     animation: slideDown 1s ease-out;
+    z-index: 999;
   }
   
   nav a {
@@ -82,19 +83,21 @@
   form#memoryForm {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     gap: 15px;
     max-width: 500px;
     margin: auto;
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.4);
+    padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.2);
+    backdrop-filter: blur(10px);
   }
   
   form#memoryForm input,
   form#memoryForm textarea {
     padding: 12px 16px;
+    width: 100%;
     border: 1px solid #ffb6c1;
     border-radius: 10px;
     font-size: 1rem;
@@ -113,6 +116,7 @@
     font-size: 1rem;
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 10px;
   }
   
   form#memoryForm button:hover {
@@ -123,8 +127,9 @@
      🖼️ MEMORY CARDS
      ========================= */
   #memoryContainer {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
     padding: 3rem 2rem;
     max-width: 1200px;
@@ -139,7 +144,9 @@
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     display: flex;
     flex-direction: column;
-    text-align: left;
+    align-items: center;
+    width: 280px;
+    text-align: center;
   }
   
   .memory-card:hover {
@@ -158,7 +165,7 @@
     padding: 1rem 1.2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
     flex-grow: 1;
   }
   
@@ -177,7 +184,6 @@
   
   /* Delete button */
   .delete-btn {
-    align-self: flex-end;
     background-color: #ff4d6d;
     color: white;
     padding: 8px 16px;
@@ -187,6 +193,7 @@
     font-size: 0.9rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: auto;
   }
   
   .delete-btn:hover {
@@ -194,7 +201,7 @@
   }
   
   /* =========================
-     📱 RESPONSIVE
+     📱 RESPONSIVE DESIGN
      ========================= */
   @media (max-width: 600px) {
     main.memories h1 {
