@@ -1,4 +1,4 @@
-console.log("Ready!");
+console.log("Memory page loaded.");
 
 // Firebase config
 const firebaseConfig = {
@@ -43,17 +43,11 @@ async function addMemory() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    // Clear inputs
     document.getElementById("imageFile").value = "";
     document.getElementById("memoryTitle").value = "";
     document.getElementById("memoryDesc").value = "";
 
     alert("Memory added successfully!");
-    
-    // 🔁 Re-render updated memory list
-    // Not needed if onSnapshot is working, but ensures immediate UI sync
-    // loadMemories(); // Optional — uncomment if needed
-
   } catch (error) {
     console.error("Error adding memory:", error);
     alert("Something went wrong while saving the memory.");
@@ -73,43 +67,57 @@ function deleteMemory(docId) {
   }
 }
 
+function createMemoryCard(data, docId) {
+  const { title, description, imageBase64 } = data;
+
+  const card = document.createElement("div");
+  card.classList.add("memory-card");
+
+  const img = document.createElement("img");
+  img.src = imageBase64;
+  img.alt = title;
+
+  const t = document.createElement("h3");
+  t.textContent = title;
+
+  const d = document.createElement("p");
+  d.textContent = description;
+
+  const delBtn = document.createElement("button");
+  delBtn.textContent = "Delete";
+  delBtn.className = "delete-btn";
+  delBtn.onclick = () => deleteMemory(docId);
+
+  card.appendChild(img);
+  card.appendChild(t);
+  card.appendChild(d);
+  card.appendChild(delBtn);
+
+  return card;
+}
+
 function loadMemories() {
   const container = document.getElementById("memoryContainer");
+  if (!container) {
+    console.error("Memory container not found!");
+    return;
+  }
 
-  // 🔄 Live sync with Firestore using onSnapshot
   memoriesRef.orderBy("createdAt", "desc").onSnapshot(snapshot => {
-    container.innerHTML = ""; // Clear previous content
+    container.innerHTML = "";
 
     snapshot.forEach(doc => {
-      const { title, description, imageBase64 } = doc.data();
+      const memoryData = doc.data();
       const docId = doc.id;
-
-      const card = document.createElement("div");
-      card.classList.add("memory-card");
-
-      const img = document.createElement("img");
-      img.src = imageBase64;
-      img.alt = title;
-
-      const t = document.createElement("h3");
-      t.textContent = title;
-
-      const d = document.createElement("p");
-      d.textContent = description;
-
-      const delBtn = document.createElement("button");
-      delBtn.textContent = "Delete";
-      delBtn.className = "delete-btn";
-      delBtn.onclick = () => deleteMemory(docId);
-
-      card.appendChild(img);
-      card.appendChild(t);
-      card.appendChild(d);
-      card.appendChild(delBtn);
+      const card = createMemoryCard(memoryData, docId);
       container.appendChild(card);
     });
+  }, error => {
+    console.error("Snapshot error:", error);
   });
 }
 
-// Start listening to Firestore
-loadMemories();
+// Ensure memory loading happens after DOM is ready
+window.addEventListener("DOMContentLoaded", () => {
+  loadMemories();
+});
