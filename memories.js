@@ -10,10 +10,12 @@ const firebaseConfig = {
   appId: "1:866538586375:web:6af88deeb3ee83536385a2"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const memoriesRef = db.collection("memories");
 
+// Convert file to base64
 function toBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -23,6 +25,7 @@ function toBase64(file) {
   });
 }
 
+// Add memory to Firestore
 async function addMemory() {
   const imageFile = document.getElementById("imageFile").files[0];
   const title = document.getElementById("memoryTitle").value.trim();
@@ -34,7 +37,9 @@ async function addMemory() {
   }
 
   try {
+    console.log("Converting image to base64...");
     const base64Image = await toBase64(imageFile);
+    console.log("Base64 conversion complete.");
 
     await memoriesRef.add({
       title,
@@ -54,6 +59,7 @@ async function addMemory() {
   }
 }
 
+// Delete a memory
 function deleteMemory(docId) {
   if (confirm("Are you sure you want to delete this memory?")) {
     memoriesRef.doc(docId).delete()
@@ -67,6 +73,7 @@ function deleteMemory(docId) {
   }
 }
 
+// Create a memory card element
 function createMemoryCard(data, docId) {
   const { title, description, imageBase64 } = data;
 
@@ -96,6 +103,7 @@ function createMemoryCard(data, docId) {
   return card;
 }
 
+// Load all memories from Firestore
 function loadMemories() {
   const container = document.getElementById("memoryContainer");
   if (!container) {
@@ -117,7 +125,7 @@ function loadMemories() {
   });
 }
 
-// Ensure memory loading happens after DOM is ready
+// Load memories on page load
 window.addEventListener("DOMContentLoaded", () => {
   loadMemories();
 });
