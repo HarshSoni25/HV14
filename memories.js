@@ -1,6 +1,6 @@
 console.log("Ready!");
 
-// Initialize Firebase (Compat SDK)
+// Firebase config
 const firebaseConfig = {
   apiKey: "AIzaSyCGVzYGsjueoZUri_7_Ahfmtt22CWiAxG0",
   authDomain: "hv14-b967f.firebaseapp.com",
@@ -35,7 +35,6 @@ async function addMemory() {
 
   try {
     const base64Image = await toBase64(imageFile);
-    console.log("Base64 image length:", base64Image.length);
 
     await memoriesRef.add({
       title,
@@ -44,11 +43,17 @@ async function addMemory() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp()
     });
 
+    // Clear inputs
     document.getElementById("imageFile").value = "";
     document.getElementById("memoryTitle").value = "";
     document.getElementById("memoryDesc").value = "";
 
     alert("Memory added successfully!");
+    
+    // 🔁 Re-render updated memory list
+    // Not needed if onSnapshot is working, but ensures immediate UI sync
+    // loadMemories(); // Optional — uncomment if needed
+
   } catch (error) {
     console.error("Error adding memory:", error);
     alert("Something went wrong while saving the memory.");
@@ -70,10 +75,10 @@ function deleteMemory(docId) {
 
 function loadMemories() {
   const container = document.getElementById("memoryContainer");
-  container.innerHTML = "";
 
+  // 🔄 Live sync with Firestore using onSnapshot
   memoriesRef.orderBy("createdAt", "desc").onSnapshot(snapshot => {
-    container.innerHTML = "";
+    container.innerHTML = ""; // Clear previous content
 
     snapshot.forEach(doc => {
       const { title, description, imageBase64 } = doc.data();
@@ -106,4 +111,5 @@ function loadMemories() {
   });
 }
 
+// Start listening to Firestore
 loadMemories();
