@@ -186,6 +186,22 @@
     font-size: 0.95rem;
   }
   
+  .delete-btn {
+    margin: 1rem;
+    padding: 10px 20px;
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .delete-btn:hover {
+    background-color: #ff6b81;
+  }
+  
   /* ============================
      🌟 ANIMATIONS
      ============================ */
